@@ -1,0 +1,15 @@
+pandas 
+numpy 
+matplotlib 
+seaborn
+sklearn 
+pypdf
+bs4 
+requests
+darts
+xgboost 
+mplfinance
+dill 
+tqdm
+
+-e . 
