@@ -10,7 +10,7 @@ def LstmModel(trainX):
     model = keras.Sequential()
     model.add(layers.LSTM(50, input_shape=(trainX.shape[1], trainX.shape[2])))
     model.add(layers.Dense(1))
-    model.compile(loss='mae', optimizer='adam')
+    #model.compile(loss='mae', optimizer='adam')
 
     return model
 
@@ -22,7 +22,7 @@ def Conv1DModel(trainX):
     model.add(layers.Flatten())
     model.add(layers.Dense(50, activation='relu'))
     model.add(layers.Dense(1))
-    model.compile(optimizer='adam', loss='mse')
+    #model.compile(optimizer='adam', loss='mse')
 
     return model
 
@@ -34,7 +34,7 @@ def ConvLstmModel(trainX):
     model.add(layers.Flatten())
     model.add(layers.Dense(50, activation='relu'))
     model.add(layers.Dense(1))
-    model.compile(optimizer='adam', loss='mse')
+    #model.compile(optimizer='adam', loss='mse')
 
     return model                                
 
@@ -42,7 +42,7 @@ def bidirectionalLstmModel(trainX):
     model = keras.Sequential()
     model.add(layers.Bidirectional(layers.LSTM(50, activation='relu'), input_shape=(trainX.shape[1], trainX.shape[2])))
     model.add(layers.Dense(1))
-    model.compile(optimizer='adam', loss='mse')
+    #model.compile(optimizer='adam', loss='mse')
 
     return model
 
@@ -51,7 +51,7 @@ def Lstmseq2seqModel(trainX):
     model.add(layers.LSTM(50, activation='relu', input_shape=(trainX.shape[1], trainX.shape[2]), return_sequences=True))
     model.add(layers.LSTM(50, activation='relu'))
     model.add(layers.Dense(1))
-    model.compile(optimizer='adam', loss='mse')
+    #model.compile(optimizer='adam', loss='mse')
 
     return model    
 
@@ -60,7 +60,7 @@ def GruModel(trainX):
     model = keras.Sequential()
     model.add(layers.GRU(50, activation='relu', input_shape=(trainX.shape[1], trainX.shape[2])))
     model.add(layers.Dense(1))
-    model.compile(optimizer='adam', loss='mse')
+    #model.compile(optimizer='adam', loss='mse')
     return model
 
 def GruSeq2SeqModel(trainX): 
@@ -68,7 +68,7 @@ def GruSeq2SeqModel(trainX):
     model.add(layers.GRU(50, activation='relu', input_shape=(trainX.shape[1], trainX.shape[2]), return_sequences=True))
     model.add(layers.GRU(50, activation='relu'))
     model.add(layers.Dense(1))
-    model.compile(optimizer='adam', loss='mse')
+    #model.compile(optimizer='adam', loss='mse')
     return model
 
 def Conv1d(trainX):
@@ -78,7 +78,7 @@ def Conv1d(trainX):
      model.add(layers.Flatten())
      model.add(layers.Dense(50, activation='relu'))
      model.add(layers.Dense(1))
-     model.compile(optimizer='adam', loss='mse')
+     #model.compile(optimizer='adam', loss='mse')
      return model
 
 
@@ -91,7 +91,7 @@ def Convlstm(trainX):
         model.add(layers.Flatten())
         model.add(layers.Dense(50, activation='relu'))
         model.add(layers.Dense(1, activation='linear'))
-        model.compile(optimizer='adam', loss='mse')
+        #model.compile(optimizer='adam', loss='mse')
 
         return model
 
