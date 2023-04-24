@@ -1,0 +1,110 @@
+Here is a few guideline for you
+
+- Always push on the dev branch
+- Before push anything, must pull the repository
+- Feature engineering related notebooks/script must to this folder
+
+
+
+
+folder docomentation 
+
+this folder contain all the Feature engineering related notebooks/script 
+and the documentation of the project
+in this folder we trid to create script to create our dataset 
+
+
+1. Feature-Engineering,ipynb
+   --> date formating 
+   --> sector volume 
+   --> a catagoic stock 
+   --> gold price global 
+   --> foren exchange rate buy and sell 
+   --> Dsex, Ds30 ,Dses 
+   --> Ds30, Ds30, Dses change 
+   --> bd reserve 
+   --> ranking by sector volume
+
+
+2. Weighted_correlation_analysis.ipynb
+
+To analyze the relationship between companies listed in Dhaka Stock Exchange
+Steps:
+   --> Scraping the 26 fundamental features and 400 days of technical data (close price) from stocknow.
+   --> Checking the distribution status of both fundamental and technical data using the Shapiro-Wilk test.
+   --> Applying normalization techniques such as MinMaxScaler to ensure all features have the same scale and importance.
+   --> Merging the datasets based on company name to combine fundamental and technical data for each company.
+   --> Applying correlation analysis using three methods: Pearson, Spearman, and Kendall's Tau to understand the relationship between variables and their strength.
+   --> Using the Pearson and Spearman method segmented weight to prioritize fundamental features for weighted correlation analysis.
+         Expected outcomes:
+   --> Insights into the relationship between fundamental features and technical data for a set of companies listed on DSE.
+   --> Potential to develop investment strategies based on identified correlations.
+
+
+
+
+3. desx_dsex_ds30_value_handeling.ipynb
+
+   --> Deu ot not avalbility of Dsex, Ds30 ,Dses until 2010-01-01, all the value of Dsex, Ds30 ,Dses are filled with 0.0 
+      to handel tihs we use the following method
+      we replace i th element of dsex ,ds30 , dese with avg of last 15 day 
+
+
+4. drop_TI.ipynb 
+   --> drop all the technical indicator from the dataset with most amount of 0 value
+
+5. Data_Filling.ipynb
+
+   --> Year High 
+        --> The "Year High" column in a stock market dataset is calculated by identifying the highest price at which a particular stock was traded during a specific year.
+            based on the data in the "High" column, finally difference between this Highest value & Current stock price “Close”.
+
+   --> Year Low 
+        --> The "Year Low" column in a stock market dataset is calculated by identifying the Lowest price at which a particular stock was traded during a specific year.
+            based on the data in the "Low" column & finally difference between this Lowest value & Current stock price “Close”.
+
+   --> Gold Rate BD 
+        --> Data on gold prices in Bangladesh is sourced from the Bangladesh Jewellers Association (BAJUS), and includes various categories such as 22k, 21k, 18k, and Sonaton.
+            To simplify the analysis, only the average of the 21k and 22k categories is used.
+
+   --> Price/EPS 
+        --> The earnings per share (EPS) of a particular company are obtained from Stocknow, a financial data provider.To calculate the price-to-earnings (P/E) ratio of the company,
+            the current stock price (found in the "Close" column) is divided by the EPS value. 
+   --> Dividend Yield 
+        --> The cash dividend per share data for a particular company is obtained from Stocknow. To calculate the dividend yield, 
+            the cash dividend per share is divided by the share price (found in the "Close" column).
+
+   --> 1st Support 
+   --> 2nd Support  
+        --> To calculate 1st & 2nd support first obtained Pivot point of specific stock applying the formula of  Pivot point = (High + Low + Close)/3,
+            and finally calculate the 1st and 2nd support:
+            1st Support = Pivot point *2 - Low
+            2nd Support = Pivot point - (High - Low)
+
+   --> 1st Resistance  
+   --> 2nd Resistance
+        --> 1st Resistance = Pivot point * 2 - Low
+            2nd Resistance = Pivot point + (High - Low)
+
+
+ -->  The net asset value (NAV) per share data for a particular company is obtained from Stocknow, a financial data provider.
+     To calculate the price-to-NAV ratio, the current share price (found in the "Close" column) is divided by the NAV per share.
+
+
+6. Beta.ipynb
+
+    --> Beta
+
+        To calculate Beta we need to calculate first:
+        -->Average daily return of the speciefic stock over the period of time
+        -->Average daily return of the market(DSEX) over the same period of time
+        -->Covariance of the stock's daily returns with the market's daily returns
+        -->Calculate the variance of the market's daily returns
+        -->Finally Divide the covariance of the stock's daily returns with the market's daily returns by the variance of the market's daily returns to obtain the stock's beta.
+
+
+
+
+note: 
+
+thnk we skiped 
