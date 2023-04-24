@@ -3,25 +3,27 @@ import sys
 import pandas as pd
 import numpy as np
 from models import *
-from src.exception import CustomException
-from src.logger import logging
 from dataclasses import dataclass
 #callbacks 
 import tensorflow as tf 
 
 from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau 
+from sklearn.preprocessing import StandardScaler
+
+from src.exception import CustomException
+from src.logger import logging
 
 
-from src.components.data_transformation import DataTransformation 
-from src.components.data_transformation import DataTransformationConfig
 
 
+# from src.components.data_transformation import DataTransformation 
+# from src.components.data_transformation import DataTransformationConfig
 
 
 @dataclass
 class ModelConfig: 
     """Class to hold model training configuration parameters"""
-    model_name: str = 'test_model'
+    model_name: str = 'GruModel'
     model_path: str = os.path.join('artifacts', 'model.pkl')
     model_actication: str = 'relu' 
     model_input_shape = None
@@ -46,7 +48,7 @@ class Data_preprocessConfig:
     n_days_future = 1
     n_features = 6   
 
-@dataclass
+
 class ModelTraining:
     def __init__(self) -> None:
         self.model_training_config = ModelConfig() 
@@ -55,11 +57,36 @@ class ModelTraining:
 
 
        
-    def initiate_model_training(self,train_data,test_data) -> None:
+    def initiate_model_training(self,train_dir) -> None:
         try:
             #data 
-            trainX = pd.read_csv(train_data)
+            trainX = pd.read_csv(train_dir)
             #preprocess data 
+            train_dates = pd.to_datetime(trainX['Date']) 
+
+            cols = list(trainX)[1:self.data_preprocessConfig.n_features]
+            df_for_training = trainX[cols].astype(float)
+            scaler = StandardScaler()
+            scaler = scaler.fit(df_for_training)
+            df_for_training_scaled = scaler.transform(df_for_training)
+
+            #data transformation
+            trainX = []
+            trainY = []
+
+            n_future = self.data_preprocessConfig.n_days_future   # Number of days we want to look into the future based on the past days.
+            n_past = self.data_preprocessConfig.n_days_past  # Number of past days we want to use to predict the future.
+
+
+            for i in range(n_past, len(df_for_training_scaled) - n_future +1):
+                trainX.append(df_for_training_scaled[i - n_past:i, 0:df_for_training.shape[1]])
+                trainY.append(df_for_training_scaled[i + n_future - 1:i + n_future, 0])
+
+            trainX, trainY = np.array(trainX), np.array(trainY)
+
+
+
+
 
 
             model_collection = model_list[self.model_training_config.model_name]
@@ -69,11 +96,13 @@ class ModelTraining:
 
 
             #train model 
-            history=model.fit(train_data, epochs= self.trainng_config.epochs, validation_data=test_data, callbacks=self.model_training_config.model_callback) 
+            history=model.fit(trainX,trainY ,epochs= self.trainng_config.epochs,
+                              validation_split=self.trainng_config.validation_split, 
+                              callbacks=self.model_training_config.model_callback) 
             
             
             #evaluate model 
-            test_loss, test_acc = model.evaluate(test_data)
+            #test_loss, test_acc = model.evaluate(test_data)
 
             logging.info(f"------------------------------------------------------------")
             logging.info(f"Model name: {self.model_training_config.model_name}")
@@ -83,8 +112,9 @@ class ModelTraining:
             logging.info(f"Metrics: {self.trainng_config.metrics}")
             logging.info(f"Optimizer: {self.trainng_config.optimizer}")
             logging.info(f"Loss: {self.trainng_config.loss}")
-            logging.info(f"Test loss: {test_loss}")
-            logging.info(f"Test accuracy: {test_acc}")
+            logging.info(f"Learning rate: {self.trainng_config.learning_rate}")
+            # logging.info(f"Test loss: {test_loss}")
+            # logging.info(f"Test accuracy: {test_acc}")
             logging.info(f"Model training completed successfully")
             logging.info(f"------------------------------------------------------------")
 
@@ -94,11 +124,5 @@ class ModelTraining:
             logging.error(f"Exception occured while training model: {e}")
             raise CustomException(e,sys)
         
-
-
-
-if __name__ == '__main__': 
-    model_training = ModelTraining('test_model')
-    model_training.initiate_model_training() 
 
 
