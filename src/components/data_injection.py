@@ -5,18 +5,16 @@ from src.exception import CustomException
 from src.logger import logging
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
+from config import DataInjectionConfig
+
+
+
 
 #seed 
 import numpy as np
 np.random.seed(42)
 
 
-@dataclass
-class DataInjectionConfig:
-    """Class to hold data injection configuration parameters"""
-    train_data_path: str = os.path.join('artifacts', 'train.csv')
-    test_data_path: str = os.path.join('artifacts', 'test.csv')
-    row_data_path: str = os.path.join('artifacts', 'data.csv')
 
 
 class DataInjection:
