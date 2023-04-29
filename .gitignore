@@ -131,3 +131,4 @@ data/
 fig/ 
 artifacts/ 
 project/
+wandb/

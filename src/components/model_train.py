@@ -1,15 +1,15 @@
 import os
 import sys
-import pandas as pd
 import numpy as np
+import pandas as pd
+
 from models import model_list
 from dataclasses import dataclass
-# from config import DataInjectionConfig, ModelConfig, TraingConfig
-# #callbacks 
-import tensorflow as tf 
-from tensorflow.keras.callbacks import EarlyStopping, ModelCheckpoint, ReduceLROnPlateau 
 from sklearn.preprocessing import StandardScaler
 from config import ModelConfig, TraingConfig ,Data_preprocessConfig
+from tensorflow.keras.callbacks import ModelCheckpoint
+# from src.logger import logging 
+# from src.exception import CustomException
 
 
 class ModelTraining:
@@ -46,22 +46,24 @@ class ModelTraining:
                 trainY.append(df_for_training_scaled[i + n_future - 1:i + n_future, 0])
 
             trainX, trainY = np.array(trainX), np.array(trainY)
-
-
-
-
-
+            print('trainX shape == {}.'.format(trainX.shape))
+            print('trainY shape == {}.'.format(trainY.shape)) 
 
             model_collection = model_list[self.model_training_config.model_name]
             model = model_collection(trainX)
             metrics = self.trainng_config.metrics
             model.compile(optimizer=self.trainng_config.optimizer, loss=self.trainng_config.loss, metrics=metrics)
-
+            model.summary()
 
             #train model 
             history=model.fit(trainX,trainY ,epochs= self.trainng_config.epochs,
+                              batch_size=self.trainng_config.batch_size,
                               validation_split=self.trainng_config.validation_split, 
-                              callbacks=self.model_training_config.model_callback) 
+                              callbacks=[ModelCheckpoint(self.model_training_config.model_path,
+                                                          monitor=self.model_training_config.monitor,
+                                                            verbose=1, save_best_only=self.model_training_config.save_best_only,
+                                                              )]
+                              ) 
             
             
             #evaluate model 
@@ -93,4 +95,4 @@ if __name__ == "__main__":
 
     
     model_training = ModelTraining()
-    model_training.initiate_model_training(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\test.csv')
+    model_training.initiate_model_training(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\train.csv')
