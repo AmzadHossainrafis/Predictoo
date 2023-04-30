@@ -150,10 +150,3 @@ class DataTransformation:
             raise CustomException(e,sys)
         
 
-if __name__ == '__main__':
-    obj= DataTransformation() 
-    obj.initiate_data_transformation(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\train.csv', 
-                                     r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\test.csv') 
-    obj.get_data_transformer_object()
-
-    

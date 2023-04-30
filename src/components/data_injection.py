@@ -58,6 +58,3 @@ class DataInjection:
             raise CustomException(e, sys)
 
 
-if __name__ == '__main__':
-    data_injection = DataInjection()
-    data_injection.initiate_data_injection()
