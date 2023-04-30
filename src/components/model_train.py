@@ -2,7 +2,6 @@ import os
 import sys
 import numpy as np
 import pandas as pd
-
 from models import model_list
 from dataclasses import dataclass
 from sklearn.preprocessing import StandardScaler
@@ -10,6 +9,7 @@ from config import ModelConfig, TraingConfig ,Data_preprocessConfig
 from tensorflow.keras.callbacks import ModelCheckpoint
 # from src.logger import logging 
 # from src.exception import CustomException
+import tensorflow as tf 
 
 
 class ModelTraining:
@@ -46,14 +46,15 @@ class ModelTraining:
                 trainY.append(df_for_training_scaled[i + n_future - 1:i + n_future, 0])
 
             trainX, trainY = np.array(trainX), np.array(trainY)
-            print('trainX shape == {}.'.format(trainX.shape))
-            print('trainY shape == {}.'.format(trainY.shape)) 
-
             model_collection = model_list[self.model_training_config.model_name]
             model = model_collection(trainX)
             metrics = self.trainng_config.metrics
             model.compile(optimizer=self.trainng_config.optimizer, loss=self.trainng_config.loss, metrics=metrics)
-            model.summary()
+            #save model graph 
+            #plot_model(model, to_file='model_plot.png', show_shapes=True, show_layer_names=True)
+            tf.keras.utils.plot_model( model,
+                                         to_file=r'C:\Users\Amzad\Desktop\sqph_stock_prediction\figs/{}.png'.format(self.model_training_config.model_name),
+                                         show_shapes=True, show_layer_names=True)
 
             #train model 
             history=model.fit(trainX,trainY ,epochs= self.trainng_config.epochs,
