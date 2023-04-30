@@ -10,6 +10,8 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 # from src.logger import logging 
 # from src.exception import CustomException
 import tensorflow as tf 
+from model_evaluation import ModelEvaluations 
+
 
 
 class ModelTraining:
@@ -97,3 +99,5 @@ if __name__ == "__main__":
     
     model_training = ModelTraining()
     model_training.initiate_model_training(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\train.csv')
+    model_evaluation = ModelEvaluations()
+    model_evaluation.initiate_model_evaluation(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\test.csv')

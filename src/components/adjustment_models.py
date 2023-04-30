@@ -7,6 +7,7 @@ from sklearn.preprocessing import MinMaxScaler, StandardScaler
 import numpy as np
 import tensorflow as tf 
 from tensorflow.keras.models import Sequential
+from models import model_list 
 
 
 df = pd.read_csv(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\data.csv')
@@ -28,9 +29,6 @@ for i in range(n_past, len(df_for_training_scaled) - n_future +1):
     trainY.append(df_for_training_scaled[i + n_future - 1:i + n_future, 0])
 
 trainX, trainY = np.array(trainX), np.array(trainY)
-
-print('trainX shape == {}.'.format(trainX.shape))
-print('trainY shape == {}.'.format(trainY.shape))
 
 
 
@@ -104,7 +102,9 @@ def base_model(trainX,model1,model2,model3,model4):
 
     #add adjusment layers 
     output = layers.Dense(128, activation='relu')(output)
-    output = layers.Dense(50, activation='relu')(output)                
+    output = layers.Dense(50, activation='relu')(output)       
+    output = layers.Dense(10, activation='relu')(output) 
+
     output = layers.Dense(1)(output)
 
 
@@ -118,6 +118,9 @@ model = base_model(trainX,model1,model2,model3,model4)
 model.summary()
 model.compile(optimizer='adam', loss='mse',metrics=['mse'])
 callbacks = [early_stopping]
+tf.keras.utils.plot_model( model,
+                        to_file=r'C:\Users\Amzad\Desktop\sqph_stock_prediction\figs/adjmodel.png',
+                        show_shapes=True, show_layer_names=True)
 
 # fit network
 history = model.fit(trainX, trainY, epochs=50, batch_size=72, validation_split=0.2, verbose=2,callbacks=callbacks)
@@ -133,20 +136,21 @@ class AdjustmentModel():
 
     def base_model(self,trainX,model_lists):
         model_input = keras.Input(shape=(trainX.shape[1], trainX.shape[2]))
-        for i in model_list :
+        for i in model_lists :
             model = model_list[i]
             output = model(model_input)
             output = layers.Flatten()(output)
+            output = layers.concatenate([output]) 
               
        
-        #concatenate the output of the models
-        output_1 = layers.Flatten()(output_1)
-        output_2 = layers.Flatten()(output_2)
-        output_3 = layers.Flatten()(output_3)
-        output_4 = layers.Flatten()(output_4)
-        output = layers.concatenate([output_1, output_2, output_3, output_4])
+        # #concatenate the output of the models
+        # output_1 = layers.Flatten()(output_1)
+        # output_2 = layers.Flatten()(output_2)
+        # output_3 = layers.Flatten()(output_3)
+        # output_4 = layers.Flatten()(output_4)
+        # output = layers.concatenate([output_1, output_2, output_3, output_4])
 
-        #add adjusment layers 
+        # #add adjusment layers 
         output = layers.Dense(128, activation='relu')(output)
         output = layers.Dense(50, activation='relu')(output)                
         output = layers.Dense(1)(output)
@@ -166,3 +170,15 @@ class AdjustmentModel():
         output = layers.Dense(1)(output)
 
 
+# if __name__ == "__main__":
+#     model_list = {model_list['LstmModel'],model_list['BiGru'],model_list['Lstmseq2seqModel']}
+#     ckpt_path = r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\model_ckpt'
+#     model = AdjustmentModel(model_list,ckpt_path)
+#     model.base_model(trainX,model_list)
+#     model.adjustmentmodel(trainX)
+#     model.summary()
+#     model.compile(optimizer='adam', loss='mse',metrics=['mse'])
+#     callbacks = [early_stopping]
+
+#     # fit network
+#     history = model.fit(trainX, trainY, epochs=50, batch_size=72, validation_split=0.2, verbose=2,callbacks=callbacks)

@@ -4,30 +4,7 @@ from tensorflow.keras import layers
 import tensorflow as tf
 from config import transformConfig 
 
-# class PositionalEncoding(layers.Layer):
-#     def __init__(self, sequence_length, output_dim):
-#         super(PositionalEncoding, self).__init__()
-#         self.pos_encoding = self.positional_encoding(sequence_length, output_dim)
 
-#     def get_angles(self, pos, i, output_dim):
-#         angle_rates = 1 / tf.pow(10000, (2 * (i // 2)) / tf.cast(output_dim, tf.float32))
-#         return pos * angle_rates
-
-#     def positional_encoding(self, sequence_length, output_dim):
-#         angle_rads = self.get_angles(
-#             tf.expand_dims(tf.range(sequence_length, dtype=tf.float32), 1),
-#             tf.expand_dims(tf.range(output_dim, dtype=tf.float32), 0),
-#             output_dim,
-#         )
-
-#         sines = tf.math.sin(angle_rads[:, 0::2])
-#         cosines = tf.math.cos(angle_rads[:, 1::2])
-#         pos_encoding = tf.concat([sines, cosines], axis=-1)
-#         pos_encoding = tf.expand_dims(pos_encoding, 0)
-#         return tf.cast(pos_encoding, tf.float32)
-
-#     def call(self, x):
-#         return x + self.pos_encoding[:, :tf.shape(x)[1], :]
 
 
 def LstmModel(trainX):
