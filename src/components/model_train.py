@@ -1,16 +1,12 @@
-import os
-import sys
 import numpy as np
 import pandas as pd
+import tensorflow as tf 
 from models import model_list
-from dataclasses import dataclass
 from sklearn.preprocessing import StandardScaler
 from config import ModelConfig, TraingConfig ,Data_preprocessConfig
 from tensorflow.keras.callbacks import ModelCheckpoint
-# from src.logger import logging 
-# from src.exception import CustomException
-import tensorflow as tf 
 from model_evaluation import ModelEvaluations 
+from data_injection import DataInjection
 
 
 
@@ -95,8 +91,8 @@ class ModelTraining:
 
 
 if __name__ == "__main__":
-
-    
+    # data_injection = DataInjection() <--- uncomment if your are training for 1st time 
+    # data_injection.initiate_data_injection() <--- uncomment if your are training for 1st time 
     model_training = ModelTraining()
     model_training.initiate_model_training(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\train.csv')
     model_evaluation = ModelEvaluations()
