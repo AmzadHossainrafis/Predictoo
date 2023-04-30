@@ -26,7 +26,7 @@ class DataInjection:
         logging.info('Initiating data injection')
         try:
             df = pd.read_csv(
-                r'C:\Users\Amzad\Desktop\sqph_stock_prediction\notebook\data\Sqph_dataset.csv')
+                self.initiate_data_injection.dataset_path)
             logging.info('Data loaded successfully')
             os.makedirs(os.path.dirname(
                 self.injection_config.train_data_path), exist_ok=True)
@@ -56,5 +56,6 @@ class DataInjection:
         except Exception as e:
             logging.error('Data loading failed')
             raise CustomException(e, sys)
+
 
 
