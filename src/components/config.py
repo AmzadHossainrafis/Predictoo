@@ -8,6 +8,8 @@ class DataInjectionConfig:
     test_data_path: str = os.path.join('artifacts', 'test.csv')
     row_data_path: str = os.path.join('artifacts', 'data.csv')
 
+    dataset_path: str =  r'C:\Users\Amzad\Desktop\sqph_stock_prediction\notebook\data\Sqph_dataset.csv'
+
 @dataclass
 class ModelConfig: 
     """Class to hold model training configuration parameters"""
