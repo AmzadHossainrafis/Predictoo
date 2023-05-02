@@ -131,3 +131,6 @@ data/
 fig/ 
 artifacts/ 
 project/
+wandb/
+figs/
+tasks.docx
