@@ -3,6 +3,19 @@ import pandas as pd
 from sklearn.preprocessing import StandardScaler
 import numpy as np
 from config import * 
+import keras.backend as K
+
+
+import keras.backend as K
+
+def r2_score(y_true, y_pred):
+    SS_res = K.sum(K.square(y_true - y_pred)) 
+    SS_tot = K.sum(K.square(y_true - K.mean(y_true))) 
+    return 1 - SS_res/(SS_tot + K.epsilon())
+
+    
+    #r2 score function 
+
 
 
 

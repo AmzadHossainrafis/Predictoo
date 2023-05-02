@@ -1,4 +1,5 @@
 import numpy as np
+import sys 
 import pandas as pd
 import tensorflow as tf
 from models import model_list
@@ -6,7 +7,9 @@ from sklearn.preprocessing import StandardScaler
 from config import ModelConfig, TraingConfig, Data_preprocessConfig
 from tensorflow.keras.callbacks import ModelCheckpoint
 from model_evaluation import ModelEvaluations
-from data_injection import DataInjection
+#from data_injection import DataInjection
+from logger import logging 
+from exception import CustomException 
 
 
 class ModelTraining:
@@ -55,9 +58,17 @@ class ModelTraining:
             tf.keras.utils.plot_model(model,
                                       to_file=r'C:\Users\Amzad\Desktop\sqph_stock_prediction\figs/{}.png'.format(
                                           self.model_training_config.model_name),
-                                      show_shapes=True, show_layer_names=True)
+                                          show_dtype=True  ,
+                                      show_shapes=True,
+                                        show_layer_names=True)
 
             # train model
+            logging.info("--------------------------------------------------")
+            logging.info("Model training config: {}".format(self.trainng_config))
+            logging.info("Model config: {}".format(self.model_training_config))
+            logging.info("--------------------------------------------------")
+
+
             history = model.fit(trainX, trainY, epochs=self.trainng_config.epochs,
                                 batch_size=self.trainng_config.batch_size,
                                 validation_split=self.trainng_config.validation_split,
@@ -66,13 +77,17 @@ class ModelTraining:
                                                            verbose=1, save_best_only=self.model_training_config.save_best_only,
                                                            )]
                                 )
+            logging.info("--------------------------------------------------")
+            logging.info("Model training completed")
+            logging.info("--------------------------------------------------")
+
 
             return history
 
         except Exception as e:
-            # logging.error(f"Exception occured while training model: {e}")
-            # raise CustomException(e,sys)
-            print(e)
+            logging.error(f"Exception occured while training model: {e}")
+            raise CustomException(e,sys)
+            
 
 
 if __name__ == "__main__":

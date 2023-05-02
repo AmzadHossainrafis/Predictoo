@@ -1,5 +1,6 @@
 from dataclasses import dataclass 
 import os
+from utils import r2_score 
 
 @dataclass
 class DataInjectionConfig:
@@ -13,7 +14,7 @@ class DataInjectionConfig:
 @dataclass
 class ModelConfig: 
     """Class to hold model training configuration parameters"""
-    model_name: str =  'Lstmseq2seqModel'
+    model_name: str =  'LstmModel'
     model_path: str = os.path.join(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts/model_ckpt', '{}.h5'.format(model_name))
     model_actication: str = 'relu' 
     model_input_shape = None
@@ -29,7 +30,7 @@ class TraingConfig:
     epochs: int = 20
     batch_size: int = 128
     validation_split: float = 0.2 
-    metrics = ['mae', 'mse', 'mape']
+    metrics = ['mae', 'mse', 'mape', r2_score]
     optimizer = 'adam' 
     loss = 'mse'
     learning_rate = 0.001 

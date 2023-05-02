@@ -4,6 +4,10 @@ import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 import tensorflow as tf
+from exception import CustomException
+from logger import logging 
+from utils import r2_score 
+
 
 
 class ModelEvaluations:
@@ -46,13 +50,17 @@ class ModelEvaluations:
             model = model_list[self.model_training_config.model_name]
             model = model(trainX)
             model = tf.keras.models.load_model(
-                self.model_training_config.model_path)
+                self.model_training_config.model_path, custom_objects={'r2_score': r2_score})
 
             metrics = self.trainng_config.metrics
             model.compile(optimizer=self.trainng_config.optimizer,
-                          loss=self.trainng_config.loss, metrics=metrics)
-
-            model.evaluate(trainX, trainY)
+                          loss=self.trainng_config.loss, metrics=metrics,)
+            logging.info('model compiled successfully, evaluating model started ')
+            history = model.evaluate(trainX, trainY)
+            #logg evaluation metrics to mlflow
+            logging.info('model evaluation completed') 
+            logging.info(f'evaluation metrics: {history}')
+            # mlflow.log_metrics(history)
 
         except Exception as e:
             # logging.error(f"Exception occured while training model: {e}")

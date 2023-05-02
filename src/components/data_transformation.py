@@ -7,13 +7,18 @@ from sklearn.impute import SimpleImputer
 from sklearn.pipeline import Pipeline 
 from sklearn.preprocessing import StandardScaler, MinMaxScaler
 from sklearn.preprocessing import OneHotEncoder
-from exception import CustomException 
+from src.exception import CustomException 
 from src.logger import logging 
 import os 
 
 
 
+'''
 
+Bug REPORT : Bug FOUND IN DATA TRANSFORMATION PIPELINE 
+
+
+'''
 
 
 
@@ -103,14 +108,14 @@ class DataTransformation:
             #test_df.drop(target_column, axis=1)
             # target_test_df = test_df[target_column]
 
-            
-            input_features_test_df = preprocessor_obj.transform(input_features_test_df)
+            # input_features_train_df = preprocessor_obj.fit_transform(input_features_train_df)
+            # input_features_test_df = preprocessor_obj.transform(input_features_test_df)
 
             logging.info('applying data transformation on train and test data') 
 
             
             input_features_train_arr = preprocessor_obj.fit_transform(input_features_train_df)
-            input_features_test_arr = preprocessor_obj.transform(input_features_test_df)
+            input_features_test_arr = preprocessor_obj.transform(input_features_train_df)
 
             trainX = []
             trainY = []
@@ -149,4 +154,9 @@ class DataTransformation:
             logging.error('Data transformation failed')
             raise CustomException(e,sys)
         
-
+if __name__ == '__main__':
+    obj = DataTransformation()
+    train_arry,test_arry=obj.initiate_data_transformation(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\train.csv',
+                                     r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\test.csv')
+    print(train_arry.shape)
+    print(test_arry.shape)

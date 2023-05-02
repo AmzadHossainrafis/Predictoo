@@ -104,6 +104,20 @@ def BiGru(trainX):
     return model
 
 
+def BiLstm(trainX):
+    model = keras.Sequential()
+    model.add(layers.Bidirectional(layers.LSTM(50, activation='relu'), input_shape=(trainX.shape[1], trainX.shape[2])))
+    model.add(layers.Dense(1))
+    #model.compile(optimizer='adam', loss='mse')
+    return model
+
+def BiGruSeq2Seq(trainX):
+    model = keras.Sequential()
+    model.add(layers.Bidirectional(layers.GRU(50, activation='relu', return_sequences=True), input_shape=(trainX.shape[1], trainX.shape[2])))
+    model.add(layers.Bidirectional(layers.GRU(50, activation='relu')))
+    model.add(layers.Dense(1))
+    #model.compile(optimizer='adam', loss='mse')
+    return model
 
 
 
@@ -143,8 +157,8 @@ def transformer_encoder(trainX):
     model = keras.Model(inputs=inputs, outputs=output, name='transformer_encoder')
     return model
 
-
-
+def Rnn(trainX):
+    pass
 
 
 model_list = { 'LstmModel': LstmModel,
@@ -158,5 +172,7 @@ model_list = { 'LstmModel': LstmModel,
             'Convlstm': Convlstm,
             'BiGru': BiGru ,
             'transform_model': transformer_encoder,
+            'BiLstm': BiLstm,
+            'BiGruSeq2Seq': BiGruSeq2Seq
 
                 }
