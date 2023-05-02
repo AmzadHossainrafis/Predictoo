@@ -1,0 +1,6 @@
+[2023-04-22 02:27:00 ] 28 root INFO : Initiating data injection
+[2023-04-22 02:27:00 ] 32 root INFO : Data loaded successfully
+[2023-04-22 02:27:00 ] 35 root INFO : Artifats created successfully
+[2023-04-22 02:27:00 ] 39 root INFO : Train test split initiated
+[2023-04-22 02:27:00 ] 47 root INFO : Train data saved successfully
+[2023-04-22 02:27:00 ] 50 root INFO : data injection completed successfully

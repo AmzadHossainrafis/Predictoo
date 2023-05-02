@@ -1,0 +1,20 @@
+[2023-04-24 00:09:26 ] 164 root ERROR : Data transformation failed
+[2023-04-24 00:10:02 ] 164 root ERROR : Data transformation failed
+[2023-04-24 00:11:06 ] 109 root INFO : train test data loaded successfully
+[2023-04-24 00:11:06 ] 111 root INFO : Data transformation started
+[2023-04-24 00:11:06 ] 101 root ERROR : Data transformation failed
+[2023-04-24 00:11:06 ] 164 root ERROR : Data transformation failed
+[2023-04-24 00:12:16 ] 92 root INFO : train test data loaded successfully
+[2023-04-24 00:12:16 ] 94 root INFO : Data transformation started
+[2023-04-24 00:12:16 ] 78 root INFO : Data transformation completed successfully
+[2023-04-24 00:12:16 ] 147 root ERROR : Data transformation failed
+[2023-04-24 00:29:54 ] 92 root INFO : train test data loaded successfully
+[2023-04-24 00:29:54 ] 94 root INFO : Data transformation started
+[2023-04-24 00:29:54 ] 78 root INFO : Data transformation completed successfully
+[2023-04-24 00:29:54 ] 147 root ERROR : Data transformation failed
+[2023-04-24 19:50:32 ] 28 root INFO : Initiating data injection
+[2023-04-24 19:50:32 ] 32 root INFO : Data loaded successfully
+[2023-04-24 19:50:32 ] 35 root INFO : Artifats created successfully
+[2023-04-24 19:50:32 ] 39 root INFO : Train test split initiated
+[2023-04-24 19:50:32 ] 47 root INFO : Train data saved successfully
+[2023-04-24 19:50:32 ] 50 root INFO : data injection completed successfully
