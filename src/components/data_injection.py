@@ -1,8 +1,8 @@
 import os
 import sys
 import pandas as pd
-from src.exception import CustomException
-from src.logger import logging
+from exception import CustomException
+from logger import logging
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
 from config import DataInjectionConfig
@@ -26,7 +26,7 @@ class DataInjection:
         logging.info('Initiating data injection')
         try:
             df = pd.read_csv(
-                r'C:\Users\Amzad\Desktop\sqph_stock_prediction\notebook\data\Sqph_dataset.csv')
+                self.initiate_data_injection.dataset_path)
             logging.info('Data loaded successfully')
             os.makedirs(os.path.dirname(
                 self.injection_config.train_data_path), exist_ok=True)
@@ -58,6 +58,4 @@ class DataInjection:
             raise CustomException(e, sys)
 
 
-if __name__ == '__main__':
-    data_injection = DataInjection()
-    data_injection.initiate_data_injection()
+
