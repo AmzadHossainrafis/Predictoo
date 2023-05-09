@@ -1,0 +1,27 @@
+[2023-05-08 00:34:53 ] 590 tensorflow WARNING : Layer lstm will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-08 00:36:47 ] 590 tensorflow WARNING : Layer lstm will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-08 00:36:49 ] 75 root INFO : -------------------------new traing -------------------------
+[2023-05-08 00:36:49 ] 76 root INFO : Model training config: TraingConfig(epochs=20, batch_size=128, validation_split=0.2)
+[2023-05-08 00:36:49 ] 77 root INFO : Model config: ModelConfig(model_name='LstmModel', model_path='C:\\Users\\Amzad\\Desktop\\sqph_stock_prediction\\artifacts/model_ckpt\\LstmModel.h5', model_actication='relu')
+[2023-05-08 00:36:49 ] 78 root INFO : --------------------------------------------------
+[2023-05-08 00:37:09 ] 89 root INFO : --------------------------------------------------
+[2023-05-08 00:37:09 ] 90 root INFO : Model training completed
+[2023-05-08 00:37:09 ] 91 root INFO : --------------------------------------------------
+[2023-05-08 00:37:09 ] 590 tensorflow WARNING : Layer lstm_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-08 00:37:09 ] 590 tensorflow WARNING : Layer lstm will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-08 00:37:09 ] 58 root INFO : model compiled successfully, evaluating model started 
+[2023-05-08 00:37:09 ] 61 root INFO : model evaluation completed
+[2023-05-08 00:37:09 ] 62 root INFO : evaluation metrics: [0.25934964418411255, 0.16195572912693024, 0.25934964418411255, 62.02859878540039, 0.626325786113739]
+[2023-05-08 00:44:35 ] 590 tensorflow WARNING : Layer lstm will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-08 00:44:36 ] 75 root INFO : -------------------------new traing -------------------------
+[2023-05-08 00:44:36 ] 76 root INFO : Model training config: TraingConfig(epochs=20, batch_size=128, validation_split=0.2)
+[2023-05-08 00:44:36 ] 77 root INFO : Model config: ModelConfig(model_name='LstmModel', model_path='C:\\Users\\Amzad\\Desktop\\sqph_stock_prediction\\artifacts/model_ckpt\\LstmModel.h5', model_actication='relu')
+[2023-05-08 00:44:36 ] 78 root INFO : --------------------------------------------------
+[2023-05-08 00:44:55 ] 89 root INFO : --------------------------------------------------
+[2023-05-08 00:44:55 ] 90 root INFO : Model training completed
+[2023-05-08 00:44:55 ] 91 root INFO : --------------------------------------------------
+[2023-05-08 00:44:55 ] 590 tensorflow WARNING : Layer lstm_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-08 00:44:55 ] 590 tensorflow WARNING : Layer lstm will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-08 00:44:56 ] 58 root INFO : model compiled successfully, evaluating model started 
+[2023-05-08 00:44:56 ] 61 root INFO : model evaluation completed
+[2023-05-08 00:44:56 ] 62 root INFO : evaluation metrics: [0.2513653635978699, 0.15405358374118805, 0.2513653635978699, 58.068729400634766, 0.6476892828941345]
