@@ -4,32 +4,51 @@ import pandas as pd
 import tensorflow as tf
 from models import model_list
 from sklearn.preprocessing import StandardScaler
-from config import ModelConfig, TraingConfig, Data_preprocessConfig
+from config import ModelConfig, TraingConfig, Data_preprocessConfig , feature_selectionConfig
 from tensorflow.keras.callbacks import ModelCheckpoint
 from model_evaluation import ModelEvaluations
 #from data_injection import DataInjection
+
+from exception import CustomException
 from logger import logging 
-from exception import CustomException 
+from sklearn.manifold import TSNE 
+
+
+import warnings
+warnings.filterwarnings('ignore')
+
+
 
 
 class ModelTraining:
-    def __init__(self) -> None:
+    def __init__(self, ) -> None:
         self.model_training_config = ModelConfig()
         self.trainng_config = TraingConfig()
         self.data_preprocessConfig = Data_preprocessConfig()
+        self.feature_selectionConfig = feature_selectionConfig() 
+       
+       
 
     def initiate_model_training(self, train_dir) -> None:
         try:
             # data
             trainX = pd.read_csv(train_dir)
+            trainX = trainX[self.feature_selectionConfig.combine_features]
             # preprocess data
             train_dates = pd.to_datetime(trainX['Date'])
-
-            cols = list(trainX)[1:self.data_preprocessConfig.n_features]
+            print(self.feature_selectionConfig.combine_features)
+            cols = list(trainX)[1:]
             df_for_training = trainX[cols].astype(float)
             scaler = StandardScaler()
             scaler = scaler.fit(df_for_training)
             df_for_training_scaled = scaler.transform(df_for_training)
+
+            # # tsen 
+            # tsne = TSNE(n_components=3, random_state=0)
+            # df_for_training_scaled= tsne.fit_transform(df_for_training_scaled)
+           
+
+
 
             # data transformation
             trainX = []
@@ -53,21 +72,23 @@ class ModelTraining:
             metrics = self.trainng_config.metrics
             model.compile(optimizer=self.trainng_config.optimizer,
                           loss=self.trainng_config.loss, metrics=metrics)
-            # save model graph
-            #plot_model(model, to_file='model_plot.png', show_shapes=True, show_layer_names=True)
+        
+
+
+        
             tf.keras.utils.plot_model(model,
-                                      to_file=r'C:\Users\Amzad\Desktop\sqph_stock_prediction\figs/{}.png'.format(
-                                          self.model_training_config.model_name),
-                                          show_dtype=True  ,
-                                      show_shapes=True,
+                                    to_file=r'C:\Users\Amzad\Desktop\sqph_stock_prediction\figs/{}.png'.format(
+                                        self.model_training_config.model_name),
+                                        show_dtype=True  ,
+                                    show_shapes=True,
                                         show_layer_names=True)
 
+
             # train model
-            logging.info("--------------------------------------------------")
+            logging.info("-------------------------new traing -------------------------")
             logging.info("Model training config: {}".format(self.trainng_config))
             logging.info("Model config: {}".format(self.model_training_config))
-            logging.info("--------------------------------------------------")
-
+            logging.info("-----------------------------------------------")
 
             history = model.fit(trainX, trainY, epochs=self.trainng_config.epochs,
                                 batch_size=self.trainng_config.batch_size,
