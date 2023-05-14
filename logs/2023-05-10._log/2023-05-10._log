@@ -1,0 +1,53 @@
+[2023-05-10 12:59:09 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 12:59:09 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 12:59:09 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 12:59:10 ] 76 root INFO : -------------------------new traing -------------------------
+[2023-05-10 12:59:10 ] 78 root INFO : Model training config: TraingConfig(epochs=20, batch_size=128, validation_split=0.2)
+[2023-05-10 12:59:10 ] 80 root INFO : Model config: ModelConfig(model_name='BiGru', model_path='C:\\Users\\Amzad\\Desktop\\sqph_stock_prediction\\artifacts/model_ckpt\\BiGru.h5', model_actication='relu')
+[2023-05-10 12:59:10 ] 81 root INFO : -----------------------------------------------
+[2023-05-10 12:59:49 ] 91 root INFO : --------------------------------------------------
+[2023-05-10 12:59:49 ] 92 root INFO : Model training completed
+[2023-05-10 12:59:49 ] 93 root INFO : --------------------------------------------------
+[2023-05-10 12:59:53 ] 617 tensorflow WARNING : Layer gru_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 12:59:53 ] 617 tensorflow WARNING : Layer gru_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 12:59:53 ] 617 tensorflow WARNING : Layer gru_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 12:59:54 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 12:59:54 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 12:59:54 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 12:59:55 ] 64 root INFO : model compiled successfully, evaluating model started 
+[2023-05-10 16:26:14 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:26:14 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:26:14 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:26:15 ] 76 root INFO : -------------------------new traing -------------------------
+[2023-05-10 16:26:15 ] 78 root INFO : Model training config: TraingConfig(epochs=20, batch_size=128, validation_split=0.2)
+[2023-05-10 16:26:15 ] 80 root INFO : Model config: ModelConfig(model_name='BiGru', model_path='C:\\Users\\Amzad\\Desktop\\sqph_stock_prediction\\artifacts/model_ckpt\\BiGru.h5', model_actication='relu')
+[2023-05-10 16:26:15 ] 81 root INFO : -----------------------------------------------
+[2023-05-10 16:26:54 ] 91 root INFO : --------------------------------------------------
+[2023-05-10 16:26:54 ] 92 root INFO : Model training completed
+[2023-05-10 16:26:54 ] 93 root INFO : --------------------------------------------------
+[2023-05-10 16:26:58 ] 617 tensorflow WARNING : Layer gru_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:26:58 ] 617 tensorflow WARNING : Layer gru_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:26:58 ] 617 tensorflow WARNING : Layer gru_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:26:58 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:26:58 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:26:58 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:26:59 ] 64 root INFO : model compiled successfully, evaluating model started 
+[2023-05-10 16:28:18 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:28:18 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:28:18 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:28:19 ] 76 root INFO : -------------------------new traing -------------------------
+[2023-05-10 16:28:19 ] 78 root INFO : Model training config: TraingConfig(epochs=20, batch_size=128, validation_split=0.2)
+[2023-05-10 16:28:19 ] 80 root INFO : Model config: ModelConfig(model_name='BiGru', model_path='C:\\Users\\Amzad\\Desktop\\sqph_stock_prediction\\artifacts/model_ckpt\\BiGru.h5', model_actication='relu')
+[2023-05-10 16:28:19 ] 81 root INFO : -----------------------------------------------
+[2023-05-10 16:28:54 ] 91 root INFO : --------------------------------------------------
+[2023-05-10 16:28:54 ] 92 root INFO : Model training completed
+[2023-05-10 16:28:54 ] 93 root INFO : --------------------------------------------------
+[2023-05-10 16:28:54 ] 617 tensorflow WARNING : Layer gru_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:28:54 ] 617 tensorflow WARNING : Layer gru_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:28:54 ] 617 tensorflow WARNING : Layer gru_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:28:54 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:28:54 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:28:54 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-10 16:28:54 ] 64 root INFO : model compiled successfully, evaluating model started 
+[2023-05-10 16:28:55 ] 67 root INFO : model evaluation completed
+[2023-05-10 16:28:55 ] 68 root INFO : evaluation metrics: [0.25033798813819885, 0.1452219933271408, 0.25033798813819885, 42.67308807373047, 0.6867692470550537]
