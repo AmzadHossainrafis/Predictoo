@@ -66,7 +66,7 @@ def GruModel(trainX):
 
 def GruSeq2SeqModel(trainX): 
     model = keras.Sequential()
-    model.add(layers.GRU(32, activation=tf.keras.layers.LeakyReLU(alpha=0.2), input_shape=(trainX.shape[1], trainX.shape[2]), return_sequences=True))
+    model.add(layers.GRU(50, activation=tf.keras.layers.LeakyReLU(alpha=0.2), input_shape=(trainX.shape[1], trainX.shape[2]), return_sequences=True))
     model.add(layers.GRU(50, activation='relu'))
     model.add(layers.Dense(1))
     #model.compile(optimizer='adam', loss='mse')
@@ -98,7 +98,7 @@ def Convlstm(trainX):
 
 def BiGru(trainX):
     model = keras.Sequential()
-    model.add(layers.Bidirectional(layers.GRU(32, activation='relu'), input_shape=(trainX.shape[1], trainX.shape[2])))
+    model.add(layers.Bidirectional(layers.GRU(250, activation=tf.keras.layers.LeakyReLU(alpha=0.3)), input_shape=(trainX.shape[1], trainX.shape[2])))
     model.add(layers.Dense(1))
     #model.compile(optimizer='adam', loss='mse')
     return model

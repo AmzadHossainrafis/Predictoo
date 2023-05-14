@@ -1,6 +1,7 @@
 from dataclasses import dataclass 
 import os
 from utils import r2_score 
+import datetime 
 
 @dataclass
 class DataInjectionConfig:
@@ -14,7 +15,7 @@ class DataInjectionConfig:
 @dataclass
 class ModelConfig: 
     """Class to hold model training configuration parameters"""
-    model_name: str =  'GruModel'
+    model_name: str =  'BiGruSeq2Seq'
     model_path: str = os.path.join(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts/model_ckpt', '{}.h5'.format(model_name))
     model_actication: str = 'relu' 
     model_input_shape = None
@@ -77,15 +78,28 @@ class feature_selectionConfig:
     list_of_economical_features=['Foreign_exchange_Buy', 'Foreign_exchange_rate_Sell','Gold Rate BD', 'Reserve in USD','Gold_Close_Price']
     list_of_scrip_features  =['Year_High','Year_Low','5nn_close_price_avg', '1st Support', '2nd Support','Ranking_by_sector_volume']
 
-    list_of_tachnical_indicator  =[ 'SMA', 'SMA_10', 'SMA_20', 'SMA_50',
+    list_of_tachnical_indicator  = [ 'SMA', 'SMA_10', 'SMA_20', 'SMA_50',
        'EMA_10', 'RSI', 'EMA_20', 'EMA_50', 'Breakout', 'Consolidate',
        'BBANDS_UPPER', 'BBANDS_MIDDLE', 'BBANDS_LOWER', 'STOCH_SLOWK',
        'STOCH_SLOWD', 'CDLSHORTLINE', 'CDLRICKSHAWMAN', 'CDLSPINNINGTOP',
        'CDLINVERTEDHAMMER', 'CDLLONGLEGGEDDOJI', 'CDLLONGLINE', 'CDLMARUBOZU',
-       'CDLMATCHINGLOW', 'CDLGRAVESTONEDOJI', 'CDLHARAMI', 'CDLHIGHWAVE',
+       'CDLMATCHINGLOW', 'CDLGRAVESTONEDOJI', 'CDLHARAMI', '  ',
        'CDLHIKKAKE', 'CDLBELTHOLD', 'CDLCLOSINGMARUBOZU', 'CDLDOJI',
        'CDLENGULFING']
 
     num_of_features : int = 5
     num_of_best_features : int = 5
-    combine_features = list_of_basic_features +list_of_scrip_features
+    combine_features = list_of_basic_features + list_of_fandamental_features + list_of_economical_features
+
+
+@dataclass 
+class PcaConfig:
+    """Class to hold data preprocess configuration parameters"""   
+
+    n_components : int = 5
+    whiten : bool = True
+    svd_solver : str = 'auto'
+    tol : float = 0.0
+    iterated_power : str = 'auto'
+    random_state : int = None
+    

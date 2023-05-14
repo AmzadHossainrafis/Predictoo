@@ -56,3 +56,10 @@ def data_preprocess(data_dir ,num_cols, num_future_days, num_past_days):
 
     return np.array(trainX), np.array(trainY)
 #prediction function 
+
+
+
+class FeatureSelection : 
+    def __init__(self) -> None:
+        pass
+    
