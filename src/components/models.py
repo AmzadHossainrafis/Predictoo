@@ -9,7 +9,7 @@ from config import transformConfig
 
 def LstmModel(trainX):
     model = keras.Sequential()
-    model.add(layers.LSTM(50, input_shape=(trainX.shape[1], trainX.shape[2])))
+    model.add(layers.LSTM(32,activation= tf.keras.layers.LeakyReLU(alpha=0.2),input_shape=(trainX.shape[1], trainX.shape[2])))
     model.add(layers.Dense(1))
     #model.compile(loss='mae', optimizer='adam')
 
@@ -41,7 +41,7 @@ def ConvLstmModel(trainX):
 
 def bidirectionalLstmModel(trainX):
     model = keras.Sequential()
-    model.add(layers.Bidirectional(layers.LSTM(50, activation='relu'), input_shape=(trainX.shape[1], trainX.shape[2])))
+    model.add(layers.Bidirectional(layers.LSTM(32, activation='relu'), input_shape=(trainX.shape[1], trainX.shape[2])))
     model.add(layers.Dense(1))
     #model.compile(optimizer='adam', loss='mse')
 
@@ -49,7 +49,7 @@ def bidirectionalLstmModel(trainX):
 
 def Lstmseq2seqModel(trainX):
     model = keras.Sequential()
-    model.add(layers.LSTM(50, activation='relu', input_shape=(trainX.shape[1], trainX.shape[2]), return_sequences=True))
+    model.add(layers.LSTM(32, activation=tf.keras.layers.LeakyReLU(alpha=0.2), input_shape=(trainX.shape[1], trainX.shape[2]), return_sequences=True))
     model.add(layers.LSTM(50, activation='relu'))
     model.add(layers.Dense(1))
     #model.compile(optimizer='adam', loss='mse')
@@ -59,14 +59,14 @@ def Lstmseq2seqModel(trainX):
 
 def GruModel(trainX):
     model = keras.Sequential()
-    model.add(layers.GRU(50, activation='relu', input_shape=(trainX.shape[1], trainX.shape[2])))
+    model.add(layers.GRU(250, activation='relu', input_shape=(trainX.shape[1], trainX.shape[2])))
     model.add(layers.Dense(1))
     #model.compile(optimizer='adam', loss='mse')
     return model
 
 def GruSeq2SeqModel(trainX): 
     model = keras.Sequential()
-    model.add(layers.GRU(50, activation='relu', input_shape=(trainX.shape[1], trainX.shape[2]), return_sequences=True))
+    model.add(layers.GRU(50, activation=tf.keras.layers.LeakyReLU(alpha=0.2), input_shape=(trainX.shape[1], trainX.shape[2]), return_sequences=True))
     model.add(layers.GRU(50, activation='relu'))
     model.add(layers.Dense(1))
     #model.compile(optimizer='adam', loss='mse')
@@ -85,9 +85,9 @@ def Conv1d(trainX):
 
 def Convlstm(trainX):
         model = keras.Sequential()
-        model.add(layers.Conv1D(filters=64, kernel_size=2, activation='relu', input_shape=(trainX.shape[1], trainX.shape[2])))
+        model.add(layers.Conv1D(filters=128, kernel_size=2, activation='relu', input_shape=(trainX.shape[1], trainX.shape[2])))
         model.add(layers.MaxPooling1D(pool_size=2))
-        model.add(layers.LSTM(50, activation='relu', return_sequences=True))
+        model.add(layers.LSTM(128, activation='relu', return_sequences=True))
         model.add(layers.LSTM(50, activation='relu', return_sequences=False))
         model.add(layers.Flatten())
         model.add(layers.Dense(50, activation='relu'))
@@ -98,7 +98,7 @@ def Convlstm(trainX):
 
 def BiGru(trainX):
     model = keras.Sequential()
-    model.add(layers.Bidirectional(layers.GRU(50, activation='relu'), input_shape=(trainX.shape[1], trainX.shape[2])))
+    model.add(layers.Bidirectional(layers.GRU(250, activation=tf.keras.layers.LeakyReLU(alpha=0.3)), input_shape=(trainX.shape[1], trainX.shape[2])))
     model.add(layers.Dense(1))
     #model.compile(optimizer='adam', loss='mse')
     return model
@@ -113,13 +113,13 @@ def BiLstm(trainX):
 
 def BiGruSeq2Seq(trainX):
     model = keras.Sequential()
-    model.add(layers.Bidirectional(layers.GRU(50, activation='relu', return_sequences=True), input_shape=(trainX.shape[1], trainX.shape[2])))
+    model.add(layers.Bidirectional(layers.GRU(32, activation=tf.keras.layers.LeakyReLU(alpha=0.2), return_sequences=True), input_shape=(trainX.shape[1], trainX.shape[2])))
     model.add(layers.Bidirectional(layers.GRU(50, activation='relu')))
     model.add(layers.Dense(1))
     #model.compile(optimizer='adam', loss='mse')
     return model
 
-
+4
 
 def transformer_encoder(trainX):
     transformer_encoder_config = transformConfig()
@@ -168,11 +168,11 @@ model_list = { 'LstmModel': LstmModel,
             'Lstmseq2seqModel': Lstmseq2seqModel,
             'GruModel': GruModel,
             'GruSeq2SeqModel': GruSeq2SeqModel,
-            'Conv1d': Conv1d,
             'Convlstm': Convlstm,
             'BiGru': BiGru ,
             'transform_model': transformer_encoder,
-            'BiLstm': BiLstm,
             'BiGruSeq2Seq': BiGruSeq2Seq
 
                 }
+
+

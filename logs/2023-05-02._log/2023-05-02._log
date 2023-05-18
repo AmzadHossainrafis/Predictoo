@@ -131,13 +131,4 @@
 [2023-05-02 11:01:39 ] 58 root INFO : model compiled successfully, evaluating model started 
 [2023-05-02 11:01:40 ] 61 root INFO : model evaluation completed
 [2023-05-02 11:01:40 ] 62 root INFO : evaluation metrics: [0.2989230751991272, 0.23357442021369934, 0.2989230751991272, 85.38277435302734, 0.31302589178085327]
-[2023-05-02 16:23:08 ] 66 root INFO : --------------------------------------------------
-[2023-05-02 16:23:08 ] 67 root INFO : Model training config: TraingConfig(epochs=20, batch_size=128, validation_split=0.2)
-[2023-05-02 16:23:08 ] 68 root INFO : Model config: ModelConfig(model_name='LstmModel', model_path='C:\\Users\\Amzad\\Desktop\\sqph_stock_prediction\\artifacts/model_ckpt\\LstmModel.h5', model_actication='relu')
-[2023-05-02 16:23:08 ] 69 root INFO : --------------------------------------------------
-[2023-05-02 16:23:43 ] 80 root INFO : --------------------------------------------------
-[2023-05-02 16:23:43 ] 81 root INFO : Model training completed
-[2023-05-02 16:23:43 ] 82 root INFO : --------------------------------------------------
-[2023-05-02 16:23:43 ] 58 root INFO : model compiled successfully, evaluating model started 
-[2023-05-02 16:23:44 ] 61 root INFO : model evaluation completed
-[2023-05-02 16:23:44 ] 62 root INFO : evaluation metrics: [0.2767651081085205, 0.22191832959651947, 0.2767651081085205, 91.75696563720703, 0.25654011964797974]
+

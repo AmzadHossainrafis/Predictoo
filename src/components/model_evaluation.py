@@ -1,4 +1,4 @@
-from config import Data_preprocessConfig, ModelConfig, TraingConfig
+from config import Data_preprocessConfig, ModelConfig, TraingConfig, feature_selectionConfig
 from models import model_list
 import numpy as np
 import pandas as pd
@@ -7,6 +7,7 @@ import tensorflow as tf
 from exception import CustomException
 from logger import logging 
 from utils import r2_score 
+from sklearn.manifold import TSNE 
 
 
 
@@ -15,19 +16,24 @@ class ModelEvaluations:
         self.model_training_config = ModelConfig()
         self.trainng_config = TraingConfig()
         self.data_preprocessConfig = Data_preprocessConfig()
+        self.feature_selectionConfig = feature_selectionConfig()
 
     def initiate_model_evaluation(self, test_dir) -> None:
         try:
             # data
             testX = pd.read_csv(test_dir)
+            testX = testX[self.feature_selectionConfig.combine_features]
             # preprocess data
             train_dates = pd.to_datetime(testX['Date'])
 
-            cols = list(testX)[1:self.data_preprocessConfig.n_features]
+            cols = list(testX)[1:]
             df_for_training = testX[cols].astype(float)
             scaler = StandardScaler()
             scaler = scaler.fit(df_for_training)
             df_for_training_scaled = scaler.transform(df_for_training)
+            tsne = TSNE(n_components=2, random_state=0)
+            df_for_training_scaled= tsne.fit_transform(df_for_training_scaled)
+           
 
             # data transformation
             trainX = []
