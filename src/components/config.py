@@ -1,6 +1,6 @@
 from dataclasses import dataclass 
 import os
-from utils import r2_score 
+from matrices import r2_score 
 import datetime 
 
 @dataclass
@@ -25,10 +25,12 @@ class ModelConfig:
     save_best_only = True
 
 
+#BiGru ,LstmModel ,BiGruSeq2Seq
+
 @dataclass
 class TraingConfig:
     """Class to hold model training configuration parameters"""
-    epochs: int = 20
+    epochs: int = 5
     batch_size: int = 128
     validation_split: float = 0.2 
     metrics = ['mae', 'mse', 'mape', r2_score]
@@ -56,9 +58,9 @@ class DataInjectionConfig:
 @dataclass 
 class adjustConfig:
     """Class to hold data preprocess configuration parameters"""   
-    pass
-
-
+    model_dir = r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\model_ckpt' 
+    #list of model name 
+    model_name = ['BiGruSeq2Seq','BiGru','LstmModel', 'BiGruSeq2Seq']
 
 
 @dataclass 
@@ -68,7 +70,7 @@ class transformConfig:
     ff_dim :int  = 256 
     num_layers :int = 5
 
-
+@dataclass
 class feature_selectionConfig:
     """Class to hold data preprocess configuration parameters"""   
 
@@ -89,7 +91,7 @@ class feature_selectionConfig:
 
     num_of_features : int = 5
     num_of_best_features : int = 5
-    combine_features = list_of_basic_features + list_of_fandamental_features + list_of_economical_features
+    combine_features = list_of_basic_features + list_of_market_features
 
 
 @dataclass 
@@ -103,3 +105,6 @@ class PcaConfig:
     iterated_power : str = 'auto'
     random_state : int = None
     
+
+
+# 
