@@ -1,0 +1,30 @@
+[2023-05-16 23:28:40 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-16 23:28:40 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-16 23:28:40 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-16 23:28:40 ] 617 tensorflow WARNING : Layer gru_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-16 23:28:40 ] 617 tensorflow WARNING : Layer gru_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-16 23:28:40 ] 617 tensorflow WARNING : Layer gru_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-16 23:28:41 ] 88 root INFO : -------------------------new traing -------------------------
+[2023-05-16 23:28:41 ] 90 root INFO : Model training config: TraingConfig(epochs=20, batch_size=128, validation_split=0.2)
+[2023-05-16 23:28:41 ] 92 root INFO : feature selection config: <config.feature_selectionConfig object at 0x0000017518954580>
+[2023-05-16 23:28:41 ] 93 root INFO : Model config: ModelConfig(model_name='BiGruSeq2Seq', model_path='C:\\Users\\Amzad\\Desktop\\sqph_stock_prediction\\artifacts/model_ckpt\\BiGruSeq2Seq.h5', model_actication='relu')
+[2023-05-16 23:28:41 ] 94 root INFO : -----------------------------------------------
+[2023-05-16 23:29:57 ] 104 root INFO : --------------------------------------------------
+[2023-05-16 23:29:57 ] 105 root INFO : Model training completed
+[2023-05-16 23:29:57 ] 106 root INFO : --------------------------------------------------
+[2023-05-16 23:29:57 ] 78 root ERROR : Exception occured while training model: local variable 'df_for_training_scaled' referenced before assignment
+[2023-05-16 23:30:53 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-16 23:30:53 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-16 23:30:53 ] 617 tensorflow WARNING : Layer gru will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-16 23:30:54 ] 617 tensorflow WARNING : Layer gru_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-16 23:30:54 ] 617 tensorflow WARNING : Layer gru_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-16 23:30:54 ] 617 tensorflow WARNING : Layer gru_1 will not use cuDNN kernels since it doesn't meet the criteria. It will use a generic GPU kernel as fallback when running on GPU.
+[2023-05-16 23:30:54 ] 89 root INFO : -------------------------new traing -------------------------
+[2023-05-16 23:30:54 ] 91 root INFO : Model training config: TraingConfig(epochs=5, batch_size=128, validation_split=0.2)
+[2023-05-16 23:30:54 ] 93 root INFO : feature selection config: <config.feature_selectionConfig object at 0x000002AE4A421D30>
+[2023-05-16 23:30:54 ] 94 root INFO : Model config: ModelConfig(model_name='BiGruSeq2Seq', model_path='C:\\Users\\Amzad\\Desktop\\sqph_stock_prediction\\artifacts/model_ckpt\\BiGruSeq2Seq.h5', model_actication='relu')
+[2023-05-16 23:30:54 ] 95 root INFO : -----------------------------------------------
+[2023-05-16 23:31:17 ] 105 root INFO : --------------------------------------------------
+[2023-05-16 23:31:17 ] 106 root INFO : Model training completed
+[2023-05-16 23:31:17 ] 107 root INFO : --------------------------------------------------
+[2023-05-16 23:31:17 ] 78 root ERROR : Exception occured while training model: local variable 'df_for_training_scaled' referenced before assignment

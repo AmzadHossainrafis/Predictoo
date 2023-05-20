@@ -8,11 +8,18 @@ import numpy as np
 import tensorflow as tf 
 from tensorflow.keras.models import Sequential
 from models import model_list 
+from config import ModelConfig, TraingConfig, Data_preprocessConfig, feature_selectionConfig
+
+feature_selectionConfig = feature_selectionConfig()
+
 
 
 df = pd.read_csv(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\data.csv')
+
 train_dates = pd.to_datetime(df['Date']) 
-cols = list(df)[1:6]
+df=df[feature_selectionConfig.combine_features]
+
+cols = list(df)[1:]
 df_for_training = df[cols].astype(float)
 scaler = StandardScaler()
 scaler = scaler.fit(df_for_training)
@@ -71,10 +78,10 @@ for layer in model3.layers:
     model3.add(layer)
 
 
-model_4 = model_list['Lstmseq2seqModel']
+model_4 = model_list['GruModel']
 model4= model_4(trainX)
 #load the weights
-model4=model4.load_weights(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\model_ckpt\Lstmseq2seqModel.h5')
+model4=model4.load_weights(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\model_ckpt\GruModel.h5')
 #model4=tf.keras.saving.load_model(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\model_ckpt\Lstmseq2seqModel.h5')
 model4 = Sequential()
 #freeze the layers and add the model to the sequential model
@@ -124,61 +131,33 @@ tf.keras.utils.plot_model( model,
 
 # fit network
 history = model.fit(trainX, trainY, epochs=50, batch_size=72, validation_split=0.2, verbose=2,callbacks=callbacks)
+#save the model 
+model.save(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\model_ckpt\adjmodel.h5')
 
 
 
+from config import adjustConfig 
 
-class AdjustmentModel():
-    def __init__(self, model_lists,ckpt_path):
-        self.model_list = model_lists
-        self.ckpt_path = ckpt_path
-
-
-    def base_model(self,trainX,model_lists):
-        model_input = keras.Input(shape=(trainX.shape[1], trainX.shape[2]))
-        for i in model_lists :
-            model = model_list[i]
-            output = model(model_input)
-            output = layers.Flatten()(output)
-            output = layers.concatenate([output]) 
-              
-       
-        # #concatenate the output of the models
-        # output_1 = layers.Flatten()(output_1)
-        # output_2 = layers.Flatten()(output_2)
-        # output_3 = layers.Flatten()(output_3)
-        # output_4 = layers.Flatten()(output_4)
-        # output = layers.concatenate([output_1, output_2, output_3, output_4])
-
-        # #add adjusment layers 
-        output = layers.Dense(128, activation='relu')(output)
-        output = layers.Dense(50, activation='relu')(output)                
-        output = layers.Dense(1)(output)
+class AdjustmentModel: 
+    def __init__(self):
+        self.adjustConfig = adjustConfig() 
+        self.model_dir = self.adjustConfig.model_dir 
 
 
 
-        model = keras.Model(inputs=model_input, outputs=output)
+    def base_model(self,model_list):
 
+        for model in model_list: 
+            model = model.load_weights(self.model_dir,compile=False)
+            model = Sequential()
+            for layer in model.layers: 
+                layer.trainable = False 
+                model.add(layer) 
+            concate_layer = layers.concatenate(model)   
 
-        return model
+               
+            
+        return concate_layer 
     
 
-    def adjustmentmodel(trainX):
-        model_input = keras.Input(shape=(trainX.shape[1], trainX.shape[2]))
-        output = layers.Dense(128, activation='relu')(output)
-        output = layers.Dense(50, activation='relu')(output)                
-        output = layers.Dense(1)(output)
 
-
-# if __name__ == "__main__":
-#     model_list = {model_list['LstmModel'],model_list['BiGru'],model_list['Lstmseq2seqModel']}
-#     ckpt_path = r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\model_ckpt'
-#     model = AdjustmentModel(model_list,ckpt_path)
-#     model.base_model(trainX,model_list)
-#     model.adjustmentmodel(trainX)
-#     model.summary()
-#     model.compile(optimizer='adam', loss='mse',metrics=['mse'])
-#     callbacks = [early_stopping]
-
-#     # fit network
-#     history = model.fit(trainX, trainY, epochs=50, batch_size=72, validation_split=0.2, verbose=2,callbacks=callbacks)

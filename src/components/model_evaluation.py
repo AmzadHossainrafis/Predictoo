@@ -8,10 +8,18 @@ from exception import CustomException
 from logger import logging 
 from utils import r2_score 
 from sklearn.manifold import TSNE 
-
-
+import sys
+from sklearn.decomposition import PCA 
 
 class ModelEvaluations:
+    '''
+    Class name : ModelEvaluations 
+    Description: This class is used to evaluate the model performance on test data
+
+    
+    
+    
+    '''
     def __init__(self) -> None:
         self.model_training_config = ModelConfig()
         self.trainng_config = TraingConfig()
@@ -23,17 +31,15 @@ class ModelEvaluations:
             # data
             testX = pd.read_csv(test_dir)
             testX = testX[self.feature_selectionConfig.combine_features]
-            # preprocess data
-            train_dates = pd.to_datetime(testX['Date'])
-
+    
             cols = list(testX)[1:]
             df_for_training = testX[cols].astype(float)
+
             scaler = StandardScaler()
             scaler = scaler.fit(df_for_training)
+
             df_for_training_scaled = scaler.transform(df_for_training)
-            tsne = TSNE(n_components=2, random_state=0)
-            df_for_training_scaled= tsne.fit_transform(df_for_training_scaled)
-           
+       
 
             # data transformation
             trainX = []
@@ -69,6 +75,6 @@ class ModelEvaluations:
             # mlflow.log_metrics(history)
 
         except Exception as e:
-            # logging.error(f"Exception occured while training model: {e}")
-            # raise CustomException(e,sys)
-            print(e)
+            logging.error(f"Exception occured while training model: {e}")
+            raise CustomException(e,sys)
+          
