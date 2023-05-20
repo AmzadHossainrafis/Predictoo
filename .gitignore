@@ -133,4 +133,5 @@ artifacts/
 project/
 wandb/
 tasks.docx
-figs/
+figs
+
