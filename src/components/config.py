@@ -9,13 +9,12 @@ class DataInjectionConfig:
     train_data_path: str = os.path.join('artifacts', 'train.csv')
     test_data_path: str = os.path.join('artifacts', 'test.csv')
     row_data_path: str = os.path.join('artifacts', 'data.csv')
-
     dataset_path: str =  r'C:\Users\Amzad\Desktop\sqph_stock_prediction\notebook\data\Sqph_dataset.csv'
 
 @dataclass
 class ModelConfig: 
     """Class to hold model training configuration parameters"""
-    model_name: str =  'BiGruSeq2Seq'
+    model_name: str =  'LstmModel'
     model_path: str = os.path.join(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts/model_ckpt', '{}.h5'.format(model_name))
     model_actication: str = 'relu' 
     model_input_shape = None
