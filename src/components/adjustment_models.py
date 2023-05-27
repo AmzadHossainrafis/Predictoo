@@ -105,25 +105,50 @@ def base_model(trainX,model1,model2,model3,model4):
     output_2 = layers.Flatten()(output_2)
     output_3 = layers.Flatten()(output_3)
     output_4 = layers.Flatten()(output_4)
-    output = layers.concatenate([output_1, output_2, output_3, output_4])
+    output = layers.concatenate([output_1, output_2, output_3, output_4]) 
 
     #add adjusment layers 
-    output = layers.Dense(128, activation='relu')(output)
-    output = layers.Dense(50, activation='relu')(output)       
-    output = layers.Dense(10, activation='relu')(output) 
+    
+    output = layers.Dense(64, activation='relu')(output)
 
+    output = layers.Dense(32, activation='relu')(output) 
+    output = layers.Dense(16, activation='relu')(output) 
     output = layers.Dense(1)(output)
+
+    # output = layers.Dense(128, activation='relu')(output)
+    # output = layers.Dense(50, activation='relu')(output) 
+    # output = layers.Dense(32, activation='relu')(output) 
+    # output = layers.Dense(1)(output)
+
+    # output = layers.Dense(128, activation='relu')(output)
+    # drop = layers.Dropout(0.2)(output) 
+    # output = layers.Dense(50, activation='relu')(output) 
+    # drop = layers.Dropout(0.2)(output) 
+    # output = layers.Dense(32, activation='relu')(output) 
+    # output = layers.Dense(1)(output)
+
+
+
+    
+
+
+
+
 
 
 
     model = keras.Model(inputs=model_input, outputs=output)
 
     return model 
+
+
 early_stopping = tf.keras.callbacks.EarlyStopping(monitor='val_loss', patience=5, mode='min')
     
 model = base_model(trainX,model1,model2,model3,model4) 
 model.summary()
 model.compile(optimizer='adam', loss='mse',metrics=['mse'])
+
+
 callbacks = [early_stopping]
 tf.keras.utils.plot_model( model,
                         to_file=r'C:\Users\Amzad\Desktop\sqph_stock_prediction\figs/adjmodel.png',
