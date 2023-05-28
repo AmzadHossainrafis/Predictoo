@@ -85,16 +85,15 @@ if __name__ == "__main__":
 
     # data_injection = DataInjection() <--- uncomment if your are training for 1st time
     # data_injection.initiate_data_injection() <--- uncomment if your are training for 1st time
-    # model_training = ModelTraining()
-    # model_training.trainner(
-    #     r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\train.csv')
-    # model_evaluation = ModelEvaluations()
-    # model_evaluation.initiate_model_evaluation(
-    #     r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\test.csv')
-    #model_name= ModelConfig().model_name
-    # result = prediciton(model_name , 221.2,221.2,219.4,219.7,218896)
-    # logging.info("--------------------------------------------------")
-    # logging.info("Prediction result on random value : {}".format(result))
-    # print(result)
+    model_training = ModelTraining()
+    model_training.trainner(
+        r'C:\Users\Amzad\Desktop\PREDICTOO\artifacts\train.csv')
+    model_evaluation = ModelEvaluations()
+    model_evaluation.initiate_model_evaluation(
+        r'C:\Users\Amzad\Desktop\PREDICTOO\artifacts\test.csv')
+    model_name= ModelConfig().model_name
+    result = prediciton(221.2,221.2,219.4,219.7,218896,"LstmModel")
+    logging.info("--------------------------------------------------")
+    logging.info("Prediction result on random value : {}".format(result))
+    print(result)
 
-    pass        
