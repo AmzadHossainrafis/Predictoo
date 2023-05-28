@@ -11,6 +11,7 @@ xgboost
 mplfinance
 dill 
 tqdm
+pydot
 
 
 -e . 
