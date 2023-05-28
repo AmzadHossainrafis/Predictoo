@@ -27,9 +27,9 @@ feature_selection = feature_selectionConfig()
 
 def prediciton(Open,High,Low,Close,Volume,model_name="adjmodel"): 
 
-    __model_dir_path = os.path.join(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts/model_ckpt', '{}.h5'.format(model_name))
-    read_data = pd.read_csv(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts\data.csv')
-    path = r'C:\Users\Amzad\Desktop\sqph_stock_prediction\notebook\data'
+    __model_dir_path = os.path.join(r'C:\Users\Amzad\Desktop\PREDICTOO\artifacts/model_ckpt', '{}.h5'.format(model_name))
+    read_data = pd.read_csv(r'C:\Users\Amzad\Desktop\PREDICTOO\artifacts\data.csv')
+    path = r'C:\Users\Amzad\Desktop\PREDICTOO\notebook\data'
     
 
     Ds30, Dsex, Dses = scraper()
@@ -195,6 +195,5 @@ def scraper(url="https://stocknow.com.bd/api/v1/instruments"):
 
 
 
-def  Standization():
     
 
