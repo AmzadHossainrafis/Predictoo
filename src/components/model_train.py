@@ -92,7 +92,7 @@ if __name__ == "__main__":
     model_evaluation.initiate_model_evaluation(
         r'C:\Users\Amzad\Desktop\PREDICTOO\artifacts\test.csv')
     model_name= ModelConfig().model_name
-    result = prediciton(221.2,221.2,219.4,219.7,218896,"LstmModel")
+    result = prediciton(221.2,221.2,219.4,219.7,218896,model_name)
     logging.info("--------------------------------------------------")
     logging.info("Prediction result on random value : {}".format(result))
     print(result)

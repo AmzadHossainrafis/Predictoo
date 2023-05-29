@@ -70,7 +70,8 @@ def prediciton(Open,High,Low,Close,Volume,model_name="adjmodel"):
     model = load_model(__model_dir_path,compile=False )#custom_objects={'r2_score': r2_score})
     prediction = model.predict(batch_of_data)
     prediciton= np.repeat(prediction, 12, axis=1)
-    prediciton = scaler.inverse_transform(prediciton)[:,2]
+    prediciton = scaler.inverse_transform(prediciton)[:,3]+0.5
+    prediction2 = prediction -1
    
 
     
