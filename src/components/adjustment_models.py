@@ -129,14 +129,6 @@ def base_model(trainX,model1,model2,model3,model4):
 
 
 
-    
-
-
-
-
-
-
-
     model = keras.Model(inputs=model_input, outputs=output)
 
     return model 

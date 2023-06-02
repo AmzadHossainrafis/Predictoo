@@ -40,9 +40,9 @@ class TraingConfig:
 @dataclass 
 class Data_preprocessConfig:
     """Class to hold data preprocess configuration parameters"""   
-    n_days_past =14
+    n_days_past =30
     n_days_future = 1
-    n_features = 6   
+    #n_features = 6   
 
 
 
