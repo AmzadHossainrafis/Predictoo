@@ -11,6 +11,11 @@ from bs4 import BeautifulSoup
 import requests 
 import json
 
+import argparse 
+parser = argparse.ArgumentParser() 
+parser.add_argument("--n_past", help="Open price of the stock", type=float)
+parser.add_argument("--n_future", help="High price of the stock", type=float)
+
 
 
 
@@ -72,10 +77,6 @@ def prediciton(Open,High,Low,Close,Volume,model_name="adjmodel"):
     prediciton= np.repeat(prediction, 12, axis=1)
     prediciton = scaler.inverse_transform(prediciton)[:,3]+0.5
     prediction2 = prediction -1
-   
-
-    
-    return prediciton 
 
 
 
@@ -196,5 +197,58 @@ def scraper(url="https://stocknow.com.bd/api/v1/instruments"):
 
 
 
+def prediction_graph(n_days ,n_past ,models ,trainX, data_from='2022-2-1'):
     
+    import numpy as np
+    import seaborn as sns 
+    import matplotlib.pyplot as plt 
+    from pandas.tseries.holiday import USFederalHolidayCalendar
+    from pandas.tseries.offsets import CustomBusinessDay
+    import datetime as dt
 
+    df = pd.read_csv(r'C:\Users\Amzad\Desktop\PREDICTOO\artifacts\test.csv')
+    #Separate dates for future plotting
+    train_dates = pd.to_datetime(df['Date'])
+    #Variables for training
+    cols = list(df)[1:6]
+    df_for_training = df[cols].astype(float)
+    us_bd = CustomBusinessDay(calendar=USFederalHolidayCalendar())
+
+    n_past = n_past #past 60 days to predict the next day
+    n_days_for_prediction=n_days #let us predict past 15 days
+
+    predict_period_dates = pd.date_range(list(train_dates)[-n_past], periods=n_days_for_prediction, freq=us_bd).tolist()
+ 
+
+    scaler = StandardScaler()
+    scaler = scaler.fit(df_for_training)
+    
+    model = models
+    #Make priction
+    prediction = model.predict(trainX[-n_days_for_prediction:]) #shape = (n, 1) where n is the n_days_for_prediction
+    prediction +=1
+
+    prediction_copies = np.repeat(prediction, df_for_training.shape[1], axis=-1)
+    y_pred_future = scaler.inverse_transform(prediction_copies)[:,0]
+    # Convert timestamp to date
+    forecast_dates = []
+    for time_i in predict_period_dates:
+        forecast_dates.append(time_i.date())
+        
+    df_forecast = pd.DataFrame({'Date':np.array(forecast_dates), 'Open':y_pred_future})
+    df_forecast['Date']=pd.to_datetime(df_forecast['Date'])
+
+
+    original = df[['Date', 'Open']]
+    original['Date']=pd.to_datetime(original['Date'])
+    original = original.loc[original['Date'] >= data_from]
+    fig, ax = plt.subplots(figsize=(12, 6))
+    sns.lineplot(x =original['Date'], y= original['Open'] ,)
+    sns.lineplot(x=df_forecast['Date'], y=df_forecast['Open'])
+
+
+    #save the graph 
+
+    plt.savefig(r'C:\Users\Amzad\Desktop\PREDICTOO\figs\{}.png'.format(str(dt.datetime.now().date())))
+
+     
