@@ -12,6 +12,6 @@ mplfinance
 dill 
 tqdm
 pydot
-
+argparse    
 
 -e . 

@@ -15,7 +15,7 @@ class DataInjectionConfig:
 class ModelConfig: 
     """Class to hold model training configuration parameters"""
     model_name: str =  'LstmModel'
-    model_path: str = os.path.join(r'C:\Users\Amzad\Desktop\sqph_stock_prediction\artifacts/model_ckpt', '{}.h5'.format(model_name))
+    model_path: str = os.path.join(r'C:\Users\Amzad\Desktop\PREDICTOO\artifacts\model_ckpt', '{}.h5'.format(model_name))
     model_actication: str = 'relu' 
     model_input_shape = None
     model_callback = None
@@ -29,7 +29,7 @@ class ModelConfig:
 @dataclass
 class TraingConfig:
     """Class to hold model training configuration parameters"""
-    epochs: int = 5
+    epochs: int = 20
     batch_size: int = 128
     validation_split: float = 0.2 
     metrics = ['mae', 'mse', 'mape', r2_score]
@@ -41,7 +41,7 @@ class TraingConfig:
 class Data_preprocessConfig:
     """Class to hold data preprocess configuration parameters"""   
     n_days_past =30
-    n_days_future = 1
+    n_days_future = 3
     #n_features = 6   
 
 
@@ -65,7 +65,7 @@ class adjustConfig:
 @dataclass 
 class transformConfig:
     """Class to hold data preprocess configuration parameters"""   
-    num_heads :int = 5 
+    num_heads :int = 20
     ff_dim :int  = 256 
     num_layers :int = 5
 
@@ -90,8 +90,7 @@ class feature_selectionConfig:
 
     num_of_features : int = 5
     num_of_best_features : int = 5
-    combine_features = list_of_basic_features + list_of_market_features
-
+    combine_features = list_of_basic_features 
 
 @dataclass 
 class PcaConfig:
