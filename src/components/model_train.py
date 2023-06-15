@@ -10,14 +10,15 @@ from model_evaluation import ModelEvaluations
 from exception import CustomException
 from logger import logging
 from utils import prediciton , prediction_graph
-import warnings
 
-warnings.filterwarnings('ignore')
+from data_injection import DataInjection
+
+
 
 import argparse 
 parser = argparse.ArgumentParser() 
-parser.add_argument("--n_past", help="number of past days ", type=int)
-parser.add_argument("--n_feture", help="number of future days ", type=int)
+parser.add_argument("-p", help="number of past days ", type=int)
+parser.add_argument("-f", help="number of future days ", type=int)
 args = parser.parse_args()
 
 class ModelTraining:
@@ -39,22 +40,15 @@ class ModelTraining:
 
             # Prepare training data
             trainX, trainY = [], []
-            n_future = args.n_feture
-            n_past = args.n_past
+            n_future = args.f
+            n_past = args.p
 
-            for i in range(n_past, len(df_for_training_scaled) - n_future + 1):
+            for i in range(n_past, len(df_for_training_scaled) - n_future +1):
                 trainX.append(df_for_training_scaled[i - n_past:i, 0:df_for_training.shape[1]])
-                #take n_future days close price in every n_past days and append it to trainY
-
                 trainY.append(df_for_training_scaled[i + n_future - 1:i + n_future, 3])
 
-
-               
-              
-
             trainX, trainY = np.array(trainX), np.array(trainY)
-            print(trainX.shape, trainY.shape)
-
+            
             # Create and compile model
             model = model_list[self.model_training_config.model_name](trainX , trainY)
             model.compile(optimizer=self.trainng_config.optimizer, loss=self.trainng_config.loss,
@@ -95,13 +89,7 @@ class ModelTraining:
 
 
 if __name__ == "__main__":
-
-    # data_injection = DataInjection() <--- uncomment if your are training for 1st time
-    # data_injection.initiate_data_injection() <--- uncomment if your are training for 1st time
+  
     model_training = ModelTraining()
-    # model_evaluation = ModelEvaluations()
-    # model_evaluation.initiate_model_evaluation(
-    #     r'C:\Users\Amzad\Desktop\PREDICTOO\artifacts\test.csv')
-
     model , trainX = model_training.trainner(r'C:\Users\Amzad\Desktop\PREDICTOO\artifacts\train.csv')
-    prediction_graph(50,10, model , trainX , data_from='2021-2-1')
+    prediction_graph(300,300, model , trainX ,0.7, data_from='2018-12-1')
