@@ -132,10 +132,9 @@ def transformer_encoder(trainX,trainY):
     # positional embedding
     positions = tf.range(start=0, limit=trainX.shape[1], delta=1)
     positions = layers.Embedding(input_dim=trainX.shape[1], output_dim=trainX.shape[2])(positions)
-    print(positions.shape)
     x += positions
  
-    
+
     # Transformer Encoder
     for i in range(num_layers):
         # Multi-Head Attention
@@ -157,8 +156,6 @@ def transformer_encoder(trainX,trainY):
     model = keras.Model(inputs=inputs, outputs=output, name='transformer_encoder')
     return model
 
-def Rnn(trainX):
-    pass
 
 
 model_list = { 'LstmModel': LstmModel,
