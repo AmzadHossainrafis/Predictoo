@@ -119,7 +119,7 @@ def BiGruSeq2Seq(trainX,trianY):
     #model.compile(optimizer='adam', loss='mse')
     return model
 
-4
+
 
 def transformer_encoder(trainX,trainY):
     transformer_encoder_config = transformConfig()
@@ -155,6 +155,11 @@ def transformer_encoder(trainX,trainY):
     # Define model
     model = keras.Model(inputs=inputs, outputs=output, name='transformer_encoder')
     return model
+
+
+def Transforme_infarno()
+
+
 
 
 
