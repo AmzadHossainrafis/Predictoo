@@ -7,23 +7,20 @@ import tensorflow as tf
 from exception import CustomException
 from logger import logging 
 from utils import r2_score 
-from sklearn.manifold import TSNE 
 import sys
-from sklearn.decomposition import PCA 
+
 
 class ModelEvaluations:
     '''
     Class name : ModelEvaluations 
     Description: This class is used to evaluate the model performance on test data
 
-    
-    
-    
     '''
     def __init__(self) -> None:
         self.model_training_config = ModelConfig()
         self.trainng_config = TraingConfig()
         self.data_preprocessConfig = Data_preprocessConfig()
+
         self.feature_selectionConfig = feature_selectionConfig()
 
     def initiate_model_evaluation(self, test_dir) -> None:
@@ -60,7 +57,7 @@ class ModelEvaluations:
 
             # load model
             model = model_list[self.model_training_config.model_name]
-            model = model(trainX)
+            model = model(trainX,trainY)
             model = tf.keras.models.load_model(
                 self.model_training_config.model_path, custom_objects={'r2_score': r2_score})
 

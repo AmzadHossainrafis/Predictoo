@@ -9,18 +9,25 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 from model_evaluation import ModelEvaluations
 from exception import CustomException
 from logger import logging
-from utils import prediciton
-import warnings
+from utils import prediciton , prediction_graph
 
-warnings.filterwarnings('ignore')
+from data_injection import DataInjection
 
+
+
+import argparse 
+parser = argparse.ArgumentParser() 
+parser.add_argument("-p", help="number of past days ", type=int)
+parser.add_argument("-f", help="number of future days ", type=int)
+args = parser.parse_args()
 
 class ModelTraining:
     def __init__(self, save_model_fig=False):
         self.model_training_config = ModelConfig()
         self.trainng_config = TraingConfig()
-        self.data_preprocessConfig = Data_preprocessConfig()
         self.feature_selectionConfig = feature_selectionConfig()
+        self.data_preprocessConfig = Data_preprocessConfig()
+    
         self.save_model_fig = save_model_fig
 
     def trainner(self, train_dir):
@@ -33,17 +40,17 @@ class ModelTraining:
 
             # Prepare training data
             trainX, trainY = [], []
-            n_future = self.data_preprocessConfig.n_days_future
-            n_past = self.data_preprocessConfig.n_days_past
+            n_future = args.f
+            n_past = args.p
 
-            for i in range(n_past, len(df_for_training_scaled) - n_future + 1):
+            for i in range(n_past, len(df_for_training_scaled) - n_future +1):
                 trainX.append(df_for_training_scaled[i - n_past:i, 0:df_for_training.shape[1]])
-                trainY.append(df_for_training_scaled[i + n_future - 1:i + n_future, 0])
+                trainY.append(df_for_training_scaled[i + n_future - 1:i + n_future, 3])
 
             trainX, trainY = np.array(trainX), np.array(trainY)
-
+            
             # Create and compile model
-            model = model_list[self.model_training_config.model_name](trainX)
+            model = model_list[self.model_training_config.model_name](trainX , trainY)
             model.compile(optimizer=self.trainng_config.optimizer, loss=self.trainng_config.loss,
                           metrics=self.trainng_config.metrics)
 
@@ -73,7 +80,7 @@ class ModelTraining:
             logging.info("Model training completed")
             logging.info("--------------------------------------------------")
 
-            return history
+            return  model , trainX 
 
         except Exception as e:
             logging.error(f"Exception occurred while training model: {e}")
@@ -82,18 +89,7 @@ class ModelTraining:
 
 
 if __name__ == "__main__":
-
-    # data_injection = DataInjection() <--- uncomment if your are training for 1st time
-    # data_injection.initiate_data_injection() <--- uncomment if your are training for 1st time
+  
     model_training = ModelTraining()
-    model_training.trainner(
-        r'C:\Users\Amzad\Desktop\PREDICTOO\artifacts\train.csv')
-    model_evaluation = ModelEvaluations()
-    model_evaluation.initiate_model_evaluation(
-        r'C:\Users\Amzad\Desktop\PREDICTOO\artifacts\test.csv')
-    model_name= ModelConfig().model_name
-    result = prediciton(221.2,221.2,219.4,219.7,218896,model_name)
-    logging.info("--------------------------------------------------")
-    logging.info("Prediction result on random value : {}".format(result))
-    print(result)
-
+    model , trainX = model_training.trainner(r'C:\Users\Amzad\Desktop\PREDICTOO\artifacts\train.csv')
+    prediction_graph(300,300, model , trainX ,0.7, data_from='2018-12-1')

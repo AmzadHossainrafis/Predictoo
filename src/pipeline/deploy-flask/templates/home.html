@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Predictoo</title>
+</head>
+
+<body backcolor = 'green'>
+    <h1>Predictoo</h1>
+    <p>predict the future of your time serice data with predictoo predictoo is developed by neocon inovations ltd which is one of the leading start up in Bangladesh . Scourse code is written by Amzad hossain 
+    <a href=""></a> this product is under development and testing fage . if you want to contribute please contact with us 
+    </p>
+
+    <form action="/predict" method="post">
+        <label for="data">Data</label>
+        <input type='file' name="data" id="data">
+        <input type="submit" value="upload">
+        <input type="submit" value="Train">
+    </form>
+    <form action="/train" method="post">
+
+
+    </form> 
+
+    <div>
+        <h2>Result</h2>
+        <p>{{ result }}</p>
+    </div>
+
+
+
+    </p>
+</body>
+</html>

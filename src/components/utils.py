@@ -13,16 +13,7 @@ import json
 
 
 
-
-
-
 feature_selection = feature_selectionConfig()
-
-    #r2 score function 
-
-
-
-
 
 
 def prediciton(Open,High,Low,Close,Volume,model_name="adjmodel"): 
@@ -42,7 +33,6 @@ def prediciton(Open,High,Low,Close,Volume,model_name="adjmodel"):
     result_df = read_stock_data(path)
     processed = calculate_returns(result_df)
 
-
     processed = processed.drop('Date', axis=1)
     processed.rename(columns={'Date(R)':'Date'}, inplace=True)
 
@@ -52,14 +42,12 @@ def prediciton(Open,High,Low,Close,Volume,model_name="adjmodel"):
     Final = calculate_beta(filtered_df_SQURPH, Index)
     Beta= Final['Beta'].iloc[-1]
 
-    #add new data at the end of the data frame 
-    #claculate index change of Dses,Ds30,Dsex columns 
     Dses_change = abs((Dses - data['DSES'].iloc[-1])) 
     Ds30_change = abs((Ds30 - data['DS30'].iloc[-1])) 
     Dsex_change = abs((Dsex - data['DSEX'].iloc[-1])) 
 
     data.loc[len(data.index)] = [Open,High,Low,Close,Volume,Dses,Ds30,Dsex,Dses_change,Ds30_change,Dsex_change,Beta]
-
+    
     data = data.astype(float)
     scaler = StandardScaler()
     batch_of_data = scaler.fit_transform(data)
@@ -67,15 +55,11 @@ def prediciton(Open,High,Low,Close,Volume,model_name="adjmodel"):
     batch_of_data = np.array(batch_of_data) # batch, 14,5 
     #expand the dimension 
     batch_of_data = np.expand_dims(batch_of_data, axis=0) # 1, batch, 14,5
-    model = load_model(__model_dir_path,compile=False )#custom_objects={'r2_score': r2_score})
+    model = load_model(__model_dir_path,compile=False )
     prediction = model.predict(batch_of_data)
     prediciton= np.repeat(prediction, 12, axis=1)
     prediciton = scaler.inverse_transform(prediciton)[:,3]+0.5
-    prediction2 = prediction -1
-   
-
-    
-    return prediciton 
+    return prediciton
 
 
 
@@ -196,5 +180,58 @@ def scraper(url="https://stocknow.com.bd/api/v1/instruments"):
 
 
 
+def prediction_graph(n_days ,n_past ,models ,trainX, unit_of_chg=0.5, data_from='2022-2-1',title='bdcom prediction'):
     
+    import numpy as np
+    import seaborn as sns 
+    import matplotlib.pyplot as plt 
+    from pandas.tseries.holiday import USFederalHolidayCalendar
+    from pandas.tseries.offsets import CustomBusinessDay
+    import datetime as dt
 
+    df = pd.read_csv(r'C:\Users\Amzad\Desktop\PREDICTOO\artifacts\train.csv')
+    df = df[df['Date'] != 0]
+    #Separate dates for future plotting
+    train_dates = pd.to_datetime(df['Date'])
+    #Variables for training
+    cols = list(df)[1:6]
+    df_for_training = df[cols].astype(float)
+    us_bd = CustomBusinessDay(calendar=USFederalHolidayCalendar())
+
+    n_past = n_past #past 60 days to predict the next day
+    n_days_for_prediction=n_days #let us predict past 15 days
+
+    predict_period_dates = pd.date_range(list(train_dates)[-n_past], periods=n_days_for_prediction, freq=us_bd).tolist()
+    scaler = StandardScaler()
+    scaler = scaler.fit(df_for_training)
+    model = models
+    #Make priction
+    prediction = model.predict(trainX[-n_days_for_prediction:]) 
+    prediction = prediction * unit_of_chg 
+    prediction_copies = np.repeat(prediction, df_for_training.shape[1], axis=-1)
+    y_pred_future = scaler.inverse_transform(prediction_copies)[:,0]
+    # Convert timestamp to date
+    forecast_dates = []
+    for time_i in predict_period_dates:
+        forecast_dates.append(time_i.date())
+        
+    df_forecast = pd.DataFrame({'Date':np.array(forecast_dates), 'Open':y_pred_future})
+    df_forecast['Date']=pd.to_datetime(df_forecast['Date'])
+
+    original = df[['Date', 'Close']]
+    original['Date']=pd.to_datetime(original['Date'])
+    original = original.loc[original['Date'] >= data_from]
+    fig, ax = plt.subplots(figsize=(12, 6))  
+    # plot style 
+    ax.set_facecolor('xkcd:light grey')
+    sns.set_style("darkgrid")
+  
+    plt.title(title,fontsize=18)
+    sns.lineplot(x =original['Date'], y= original['Close'],linewidth=2.5, color='blue', label='Actual')
+    sns.lineplot(x=df_forecast['Date'], y=df_forecast['Open'],linewidth=2.5, color='red', label='Predicted')
+
+    #save the graph 
+
+    plt.savefig(r'C:\Users\Amzad\Desktop\PREDICTOO\figs\{}.png'.format(str(dt.datetime.now().date())))
+
+     

@@ -7,83 +7,95 @@ from config import transformConfig
 
 
 
-def LstmModel(trainX):
+def LstmModel(trainX,trainY):
+    '''
+    args: 
+        trainX: training data
+        trainY: training labels.
+
+
+    returns:
+        model: keras model.
+    
+    '''
+
+
     model = keras.Sequential()
     model.add(layers.LSTM(32,activation= tf.keras.layers.LeakyReLU(alpha=0.2),input_shape=(trainX.shape[1], trainX.shape[2])))
-    model.add(layers.Dense(1))
+    model.add(layers.Dense(trainY.shape[1]))
     #model.compile(loss='mae', optimizer='adam')
 
     return model
 
 
-def Conv1DModel(trainX):
+def Conv1DModel(trainX,trainY):
     model = keras.Sequential()
     model.add(layers.Conv1D(filters=64, kernel_size=2, activation='relu', input_shape=(trainX.shape[1], trainX.shape[2])))
     model.add(layers.MaxPooling1D(pool_size=2))
     model.add(layers.Flatten())
     model.add(layers.Dense(50, activation='relu'))
-    model.add(layers.Dense(1))
+    model.add(layers.Dense(trainY.shape[1]))
     #model.compile(optimizer='adam', loss='mse')
 
     return model
 
 
 
-def ConvLstmModel(trainX):
+def ConvLstmModel(trainX,trainY):
     model = keras.Sequential()
     model.add(layers.ConvLSTM2D(filters=64, kernel_size=(1,2), activation='relu', input_shape=(trainX.shape[1], 1, trainX.shape[2], trainX.shape[3])))
     model.add(layers.Flatten())
     model.add(layers.Dense(50, activation='relu'))
-    model.add(layers.Dense(1))
+    model.add(layers.Dense(trainY.shape[1])) 
     #model.compile(optimizer='adam', loss='mse')
 
     return model                                
 
-def bidirectionalLstmModel(trainX):
+def bidirectionalLstmModel(trainX,trainY):
     model = keras.Sequential()
     model.add(layers.Bidirectional(layers.LSTM(32, activation='relu'), input_shape=(trainX.shape[1], trainX.shape[2])))
-    model.add(layers.Dense(1))
+    model.add(layers.Dense(trainY.shape[1]))
     #model.compile(optimizer='adam', loss='mse')
 
     return model
 
-def Lstmseq2seqModel(trainX):
+def Lstmseq2seqModel(trainX,trainY):
     model = keras.Sequential()
     model.add(layers.LSTM(32, activation=tf.keras.layers.LeakyReLU(alpha=0.2), input_shape=(trainX.shape[1], trainX.shape[2]), return_sequences=True))
     model.add(layers.LSTM(50, activation='relu'))
-    model.add(layers.Dense(1))
+    model.add(layers.Dense(trainY.shape[1]))
     #model.compile(optimizer='adam', loss='mse')
 
     return model    
 
 
-def GruModel(trainX):
+def GruModel(trainX,trainY):
     model = keras.Sequential()
     model.add(layers.GRU(250, activation='relu', input_shape=(trainX.shape[1], trainX.shape[2])))
-    model.add(layers.Dense(1))
+    model.add(layers.Dense(trainY.shape[1]))
     #model.compile(optimizer='adam', loss='mse')
     return model
 
-def GruSeq2SeqModel(trainX): 
+def GruSeq2SeqModel(trainX,trainY): 
     model = keras.Sequential()
     model.add(layers.GRU(50, activation=tf.keras.layers.LeakyReLU(alpha=0.2), input_shape=(trainX.shape[1], trainX.shape[2]), return_sequences=True))
     model.add(layers.GRU(50, activation='relu'))
-    model.add(layers.Dense(1))
+    model.add(layers.Dense(trainY.shape[1]))
     #model.compile(optimizer='adam', loss='mse')
     return model
 
-def Conv1d(trainX):
+def Conv1d(trainX,trainY):
      model = keras.Sequential()
      model.add(layers.Conv1D(filters=128, kernel_size=2, activation='relu', input_shape=(trainX.shape[1], trainX.shape[2])) )
      model.add(layers.MaxPooling1D(pool_size=2))
      model.add(layers.Flatten())
      model.add(layers.Dense(50, activation='relu'))
-     model.add(layers.Dense(1))
+     model.add(layers.Dense(trainY.shape[1]))
      #model.compile(optimizer='adam', loss='mse')
      return model
 
 
-def Convlstm(trainX):
+def Convlstm(trainX,trainY):
         model = keras.Sequential()
         model.add(layers.Conv1D(filters=128, kernel_size=2, activation='relu', input_shape=(trainX.shape[1], trainX.shape[2])))
         model.add(layers.MaxPooling1D(pool_size=2))
@@ -91,37 +103,37 @@ def Convlstm(trainX):
         model.add(layers.LSTM(50, activation='relu', return_sequences=False))
         model.add(layers.Flatten())
         model.add(layers.Dense(50, activation='relu'))
-        model.add(layers.Dense(1, activation='linear'))
+        model.add(layers.Dense(trainY.shape[1], activation='linear'))
         #model.compile(optimizer='adam', loss='mse')
 
         return model
 
-def BiGru(trainX):
+def BiGru(trainX , trainY):
     model = keras.Sequential()
     model.add(layers.Bidirectional(layers.GRU(250, activation=tf.keras.layers.LeakyReLU(alpha=0.3)), input_shape=(trainX.shape[1], trainX.shape[2])))
-    model.add(layers.Dense(1))
+    model.add(layers.Dense(trainY.shape[1]))
     #model.compile(optimizer='adam', loss='mse')
     return model
 
 
-def BiLstm(trainX):
+def BiLstm(trainX,trainY):
     model = keras.Sequential()
     model.add(layers.Bidirectional(layers.LSTM(50, activation='relu'), input_shape=(trainX.shape[1], trainX.shape[2])))
-    model.add(layers.Dense(1))
+    model.add(layers.Dense(trainY.shape[1]))
     #model.compile(optimizer='adam', loss='mse')
     return model
 
-def BiGruSeq2Seq(trainX):
+def BiGruSeq2Seq(trainX,trianY):
     model = keras.Sequential()
     model.add(layers.Bidirectional(layers.GRU(32, activation=tf.keras.layers.LeakyReLU(alpha=0.2), return_sequences=True), input_shape=(trainX.shape[1], trainX.shape[2])))
     model.add(layers.Bidirectional(layers.GRU(50, activation='relu')))
-    model.add(layers.Dense(1))
+    model.add(layers.Dense(trianY.shape[1]))
     #model.compile(optimizer='adam', loss='mse')
     return model
 
-4
 
-def transformer_encoder(trainX):
+
+def transformer_encoder(trainX,trainY):
     transformer_encoder_config = transformConfig()
     num_heads=transformer_encoder_config.num_heads
     ff_dim=transformer_encoder_config.ff_dim
@@ -132,10 +144,9 @@ def transformer_encoder(trainX):
     # positional embedding
     positions = tf.range(start=0, limit=trainX.shape[1], delta=1)
     positions = layers.Embedding(input_dim=trainX.shape[1], output_dim=trainX.shape[2])(positions)
-    print(positions.shape)
     x += positions
  
-    
+
     # Transformer Encoder
     for i in range(num_layers):
         # Multi-Head Attention
@@ -151,14 +162,19 @@ def transformer_encoder(trainX):
 
     # Output layer
     output = layers.GlobalAveragePooling1D()(x)
-    output = layers.Dense(1)(output)
+    output = layers.Dense(trainY.shape[1])(output)
 
     # Define model
     model = keras.Model(inputs=inputs, outputs=output, name='transformer_encoder')
     return model
 
-def Rnn(trainX):
+def informer(trainX,trainY): 
     pass
+
+
+
+
+
 
 
 model_list = { 'LstmModel': LstmModel,
@@ -172,7 +188,6 @@ model_list = { 'LstmModel': LstmModel,
             'BiGru': BiGru ,
             'transform_model': transformer_encoder,
             'BiGruSeq2Seq': BiGruSeq2Seq
-
-                }
+              }
 
 
