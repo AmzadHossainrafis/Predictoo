@@ -33,16 +33,31 @@ ollah your good to go
 
 
 
-## Usage
+## how to train 
+config the cofig.py accordingly to your training enviroment . Predictoo requre dataset ['Date','Open', 'High', 'Low', 'Close', 'Volume',] following formate .
 
-A few examples of useful commands and/or tasks.
+for every time serice data there is a simple preprocessing pipeline which will formate your date and split the data into test , train inside the aftifact folder 
+
+
+### must change in config.py
+dataset_path: must reset according to your dataset dir 
+ 
+model_path: must reset with a dir where you want to store your train weights 
+
 
 ```
-$ First example
-$ Second example
-$ And keep this in mind
+$ python data_injections.py
 ```
 
-## Deployment
+bash  
+```
+$ cd src/components
+$ python model_train.py
 
-Additional notes on how to deploy this on a live or release system. Explaining the most important branches, what pipelines they trigger and how to update the database (if anything special).
+```
+model evaluation 
+```
+$ python model_evaluation.py 
+```
+
+
