@@ -26,7 +26,7 @@ class DataInjection:
         logging.info('Initiating data injection')
         try:
             df = pd.read_csv(
-                self.initiate_data_injection.dataset_path)
+                r'C:\Users\Amzad\Desktop\PREDICTOO\notebook\data\RAKCERAMIC.csv')
             logging.info('Data loaded successfully')
             os.makedirs(os.path.dirname(
                 self.injection_config.train_data_path), exist_ok=True)

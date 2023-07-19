@@ -8,6 +8,18 @@ from config import transformConfig
 
 
 def LstmModel(trainX,trainY):
+    '''
+    args: 
+        trainX: training data
+        trainY: training labels.
+
+
+    returns:
+        model: keras model.
+    
+    '''
+
+
     model = keras.Sequential()
     model.add(layers.LSTM(32,activation= tf.keras.layers.LeakyReLU(alpha=0.2),input_shape=(trainX.shape[1], trainX.shape[2])))
     model.add(layers.Dense(trainY.shape[1]))
@@ -119,7 +131,7 @@ def BiGruSeq2Seq(trainX,trianY):
     #model.compile(optimizer='adam', loss='mse')
     return model
 
-4
+
 
 def transformer_encoder(trainX,trainY):
     transformer_encoder_config = transformConfig()
@@ -132,10 +144,9 @@ def transformer_encoder(trainX,trainY):
     # positional embedding
     positions = tf.range(start=0, limit=trainX.shape[1], delta=1)
     positions = layers.Embedding(input_dim=trainX.shape[1], output_dim=trainX.shape[2])(positions)
-    print(positions.shape)
     x += positions
  
-    
+
     # Transformer Encoder
     for i in range(num_layers):
         # Multi-Head Attention
@@ -157,8 +168,13 @@ def transformer_encoder(trainX,trainY):
     model = keras.Model(inputs=inputs, outputs=output, name='transformer_encoder')
     return model
 
-def Rnn(trainX):
+def informer(trainX,trainY): 
     pass
+
+
+
+
+
 
 
 model_list = { 'LstmModel': LstmModel,
