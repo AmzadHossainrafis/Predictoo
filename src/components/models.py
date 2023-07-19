@@ -8,6 +8,18 @@ from config import transformConfig
 
 
 def LstmModel(trainX,trainY):
+    '''
+    args: 
+        trainX: training data
+        trainY: training labels.
+
+
+    returns:
+        model: keras model.
+    
+    '''
+
+
     model = keras.Sequential()
     model.add(layers.LSTM(32,activation= tf.keras.layers.LeakyReLU(alpha=0.2),input_shape=(trainX.shape[1], trainX.shape[2])))
     model.add(layers.Dense(trainY.shape[1]))
@@ -156,8 +168,10 @@ def transformer_encoder(trainX,trainY):
     model = keras.Model(inputs=inputs, outputs=output, name='transformer_encoder')
     return model
 
+def informer(trainX,trainY): 
+    pass
 
-def Transforme_infarno()
+
 
 
 
