@@ -52,7 +52,7 @@ $ python data_injections.py
 bash  
 ```
 $ cd src/components
-$ python model_train.py
+$ python model_train.py -p 14 - 1 
 
 ```
 model evaluation 
