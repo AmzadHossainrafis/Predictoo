@@ -2,22 +2,23 @@ import numpy as np
 import sys
 import pandas as pd
 import tensorflow as tf
-from models import model_list
+from src.components.models import model_list
 from sklearn.preprocessing import StandardScaler
-from config import ModelConfig, TraingConfig, Data_preprocessConfig, feature_selectionConfig
+from src.components.config import ModelConfig, TraingConfig, Data_preprocessConfig, feature_selectionConfig
 from tensorflow.keras.callbacks import ModelCheckpoint
-from model_evaluation import ModelEvaluations
-from exception import CustomException
-from logger import logging
-from utils import prediciton , prediction_graph
+from src.components.model_evaluation import ModelEvaluations
+from src.exception import CustomException
+from src.logger import logging
+from src.components.utils import prediciton , prediction_graph
 import warnings
+#from data_injection import DataInjection
 
 warnings.filterwarnings('ignore')
 
 import argparse 
 parser = argparse.ArgumentParser() 
-parser.add_argument("--n_past", help="number of past days ", type=int)
-parser.add_argument("--n_feture", help="number of future days ", type=int)
+parser.add_argument("--n_past", help="number of past days ", type=int,default=14)
+parser.add_argument("--n_feture", help="number of future days ", type=int,default=1)
 args = parser.parse_args()
 
 class ModelTraining:
