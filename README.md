@@ -16,6 +16,7 @@ The things you need before installing the software.
 
 * python 3.6 or higher 
 * tensorflow 2.0 or higher 
+* for gpu support cuda 10.0 or higher 
 
 
 
@@ -25,7 +26,8 @@ A step by step guide that will tell you how to get the development environment u
 
 bash  
 ```
-$conda create -n predictoo python=3.6
+$conda create -n predictoo python=3.8
+$conda activate predictoo 
 $pip install -r requirements.txt 
 
 ```

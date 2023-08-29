@@ -12,9 +12,8 @@ dill
 tqdm
 pydot
 argparse  
-flask
 tensorflow-cpu
 requests
-jninja2 
+
 
 -e . 
