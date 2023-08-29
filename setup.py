@@ -26,7 +26,7 @@ setup(
     packages=find_packages(), 
     include_package_data=True, 
     install_requires=get_requirements('requirements.txt'),
-    author='John Doe',
+    author='Amzad hossain rafi ',
     author_email='amzad.rafi@northsouth.edu',
     description='A simple stock market app',
     long_description=open('README.md').read(),

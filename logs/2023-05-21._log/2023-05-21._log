@@ -1,0 +1,1 @@
+[2023-05-21 23:44:46 ] 98 root ERROR : Exception occured while training model: cannot concatenate object of type '<class 'numpy.ndarray'>'; only Series and DataFrame objs are valid

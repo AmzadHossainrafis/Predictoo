@@ -8,8 +8,13 @@ bs4
 requests
 darts
 xgboost 
-mplfinance
 dill 
 tqdm
+pydot
+argparse  
+flask
+tensorflow-cpu
+requests
+jninja2 
 
 -e . 
