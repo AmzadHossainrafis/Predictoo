@@ -14,7 +14,7 @@ class DataInjectionConfig:
 @dataclass
 class ModelConfig: 
     """Class to hold model training configuration parameters"""
-    model_name: str =  'BiGruSeq2Seq'
+    model_name: str =  'LstmModel'
     model_path: str = os.path.join(r'C:\Users\Amzad\Desktop\PREDICTOO\artifacts\model_ckpt', '{}.h5'.format(model_name))
     model_actication: str = 'relu' 
     model_input_shape = None
