@@ -1,6 +1,6 @@
 from dataclasses import dataclass 
 import os
-from matrices import r2_score 
+from src.components.matrices import r2_score 
 import datetime 
 
 @dataclass
