@@ -1,5 +1,5 @@
 import os
-from config import feature_selectionConfig
+from src.components.config import feature_selectionConfig
 import pandas as pd 
 #model evaluation function
 from sklearn.preprocessing import StandardScaler
@@ -216,9 +216,7 @@ def prediction_graph(n_days ,n_past ,models ,trainX, data_from='2022-2-1'):
 
     n_past = n_past #past 60 days to predict the next day
     n_days_for_prediction=n_days #let us predict past 15 days
-
     predict_period_dates = pd.date_range(list(train_dates)[-n_past], periods=n_days_for_prediction, freq=us_bd).tolist()
- 
 
     scaler = StandardScaler()
     scaler = scaler.fit(df_for_training)
@@ -237,18 +235,13 @@ def prediction_graph(n_days ,n_past ,models ,trainX, data_from='2022-2-1'):
         
     df_forecast = pd.DataFrame({'Date':np.array(forecast_dates), 'Open':y_pred_future})
     df_forecast['Date']=pd.to_datetime(df_forecast['Date'])
-
-
     original = df[['Date', 'Open']]
     original['Date']=pd.to_datetime(original['Date'])
     original = original.loc[original['Date'] >= data_from]
     fig, ax = plt.subplots(figsize=(12, 6))
     sns.lineplot(x =original['Date'], y= original['Open'] ,)
     sns.lineplot(x=df_forecast['Date'], y=df_forecast['Open'])
-
-
     #save the graph 
-
     plt.savefig(r'C:\Users\Amzad\Desktop\PREDICTOO\figs\{}.png'.format(str(dt.datetime.now().date())))
 
      

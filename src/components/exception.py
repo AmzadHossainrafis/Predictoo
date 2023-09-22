@@ -18,3 +18,10 @@ class CustomException(Exception):
     def __str__(self):
         return f'{self.error_message}' 
     
+
+if __name__ == "__main__":
+    try:
+        a = 1/0
+    except Exception as e:
+        logging.info('division by zero is not possible')
+        raise CustomException(e,sys)

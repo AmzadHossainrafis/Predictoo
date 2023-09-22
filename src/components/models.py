@@ -2,7 +2,7 @@
 from tensorflow import keras
 from tensorflow.keras import layers
 import tensorflow as tf
-from config import transformConfig 
+from src.components.config import transformConfig 
 
 
 

@@ -1,12 +1,12 @@
-from config import Data_preprocessConfig, ModelConfig, TraingConfig, feature_selectionConfig
-from models import model_list
+from src.components.config import Data_preprocessConfig, ModelConfig, TraingConfig, feature_selectionConfig
+from src.components.models import model_list
 import numpy as np
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 import tensorflow as tf
-from exception import CustomException
-from logger import logging 
-from utils import r2_score 
+from src.exception import CustomException
+from src.logger import logging 
+from src.components.utils import r2_score 
 import sys
 
 

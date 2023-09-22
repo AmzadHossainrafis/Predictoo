@@ -1,11 +1,11 @@
 import os
 import sys
 import pandas as pd
-from exception import CustomException
-from logger import logging
+from src.exception import CustomException
+from src.logger import logging
 from sklearn.model_selection import train_test_split
 from dataclasses import dataclass
-from config import DataInjectionConfig
+from src.components.config import DataInjectionConfig
 
 
 
